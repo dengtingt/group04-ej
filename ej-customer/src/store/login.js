@@ -16,8 +16,7 @@ export default {
     actions:{
         async customerlogin(context,user){
             let response = await post_json("/user/login",user)
-            console.log(response.data)
-            context.commit("refresh",response.data)
+            context.commit("refresh",response.data.token)
             return response 
         }
     }
