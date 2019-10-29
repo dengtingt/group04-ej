@@ -5,6 +5,11 @@ import Manager from '../pages/manager/Layout.vue'
 Vue.use(VueRouter)
 
 const routes = [
+   {
+    path: '/login',
+    name: 'login',
+    component: () => import('../pages/Login.vue')
+  },
   {
     path: '/',
     name: 'manager',
@@ -20,11 +25,6 @@ const routes = [
       component:() => import('../pages/manager/User.vue')
     }]
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('../pages/Login.vue')
-  }
 ]
 
 const router = new VueRouter({
