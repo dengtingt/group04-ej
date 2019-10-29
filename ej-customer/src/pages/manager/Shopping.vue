@@ -5,7 +5,7 @@
     @click-left="onClickLeft">
           <van-icon name="search" slot="right" />
     </van-nav-bar>
-    <!-- bind:click-right="onClickRight" -->
+    
     </div>
     <div class="left_nav">
       <!-- 左侧 -->

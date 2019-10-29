@@ -38,8 +38,6 @@ const routes = [
     name: 'confirmOrder',
     component: () => import('../pages/manager/confirmOrder.vue')
   }
-  
-  
 ]
 
 const router = new VueRouter({

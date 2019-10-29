@@ -45,7 +45,7 @@
             <van-col span="6"><van-icon name="underway-o" /></van-col>
             <van-col span="18">
                 <div class="label">服务时间</div>
-                <div>时间</div>
+                <div>当前时间</div>
             </van-col>
         </van-row>
         <br>
