@@ -23,6 +23,9 @@ const routes = [
     },{
       path:"user",
       component:() => import('../pages/manager/User.vue')
+    },{
+      path:"address",
+      component:() => import('../pages/manager/Address.vue')
     }]
   },
 ]
