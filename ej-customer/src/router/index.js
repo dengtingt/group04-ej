@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Manager from '../pages/manager/Layout.vue'
+// import Shopping from '../pages/manager/Shopping.vue'
+// import confirmOrder from '../pages/manager/confirmOrder.vue'
 
 Vue.use(VueRouter)
 
@@ -23,8 +25,21 @@ const routes = [
     },{
       path:"user",
       component:() => import('../pages/manager/User.vue')
-    }]
+    },
+    {
+      path: '/Shopping',
+      name: 'shopping',
+      component: () => import('../pages/manager/Shopping.vue')
+    },
+    ]
   },
+  {
+    path: '/confirmOrder',
+    name: 'confirmOrder',
+    component: () => import('../pages/manager/confirmOrder.vue')
+  }
+  
+  
 ]
 
 const router = new VueRouter({
