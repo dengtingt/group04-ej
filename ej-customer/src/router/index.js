@@ -25,6 +25,7 @@ const routes = [
     },{
       path:"user",
       component:() => import('../pages/manager/User.vue')
+<<<<<<< HEAD
     },
     {
       path: '/Shopping',
@@ -32,6 +33,12 @@ const routes = [
       component: () => import('../pages/manager/Shopping.vue')
     },
     ]
+=======
+    },{
+      path:"address",
+      component:() => import('../pages/manager/Address.vue')
+    }]
+>>>>>>> b492103a0a829afa4326104da6777a44d6e4f621
   },
   {
     path: '/confirmOrder',
