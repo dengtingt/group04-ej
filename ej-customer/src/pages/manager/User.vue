@@ -39,13 +39,11 @@ export default {
     },
     computed:{
       // 映射，将vuex state中的状态映射为vue中的属性
-      ...mapState("user",["info"]),
-      ...mapState("login",["token"])
+      ...mapState("user",["info","token"]),
     },
     methods:{
       // 映射，将vuex action中得到的动作映射为vue中的方法
-      ...mapActions("user",["findUser"]),
-      ...mapActions("login",["customerlogin","logout"]),
+      ...mapActions("user",["findUser","logout"]),
       // 地址信息跳转
       addressHandler(){
         this.$router.push('./address');
@@ -54,7 +52,7 @@ export default {
       logoutHandler(){
         this.logout()
         .then(()=>{
-          this.$router.push({path:'/login'})
+          this.$router.push({path:'../login'})
         })
       }
     }

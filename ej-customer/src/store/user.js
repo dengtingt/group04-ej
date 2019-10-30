@@ -1,5 +1,5 @@
 import {get,post,post_json} from '../http/axios'
-import {setToken,getToken,removeToken} from '../../utils/auth'
+import {setToken,getToken,removeToken} from '../utils/auth'
 export default{
     namespaced:true,
     state:{
@@ -13,19 +13,26 @@ export default{
             state.info = info;
         },
         refreshToken(state,token){
-          state.token = token;
+            state.token = token;
         }
     },
     actions:{
+        // 登录
+        async login(context,payload){
+            // 1.登录
+            let response = await post_json("/user/login",payload);
+            let token = response.data.token;
+            // 2.将token缓存起来？localStorage
+            setToken(token);
+            // 3. 将token维护到状态机中
+            context.commit("refreshToken",token);
+        },
+
         // 获取用户信息
         async findUser(context,token){
             let response = await get("/user/info",{token});
             // 将用户信息设置到info中
             context.commit("refreshInfo",response.data)
-            // 2.将token缓存起来？localStorage
-            setToken(token);
-            // 3. 将token维护到状态机中
-            context.commit("refreshToken",token);
         },
         // 退出登录
         async logout(context){

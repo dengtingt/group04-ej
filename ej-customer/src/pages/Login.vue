@@ -41,14 +41,11 @@ export default {
 
   },
   methods: {
-    ...mapActions("login",["customerlogin"]),
+    ...mapActions("user",["login"]),
     loginyz(){
-      this.customerlogin(this.user).then(res=>{
-        if(res.status === 200){
+      this.login(this.user)
+      .then(()=>{
           this.$router.push("home")
-        }else{
-          alert("用户名或者密码错误，请重新输入")
-        }
       })
     }
   },
