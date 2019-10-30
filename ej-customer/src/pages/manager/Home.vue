@@ -6,17 +6,18 @@
     <van-row>
       <van-grid :column-num="3">
         <van-grid-item
-          v-for="c in categories"
+          v-for="(c , index) in categories"
           :key="c.id"
           :icon="c.icon"
           :text="c.name"
+          @click="searchcategory(index)"
         />
       </van-grid>
     </van-row>
   </div>
 </template>
 <script>
-import {mapState,mapActions} from 'vuex'
+import {mapState,mapActions,mapMutations} from 'vuex'
 export default {
   created(){
     this.findAllCategories();
@@ -25,7 +26,12 @@ export default {
     ...mapState("category",["categories"])
   },
   methods:{
-    ...mapActions("category",["findAllCategories"])
+    ...mapActions("category",["findAllCategories"]),
+    ...mapMutations("shopping",["categoryindex"]),
+    searchcategory(index){
+      this.categoryindex(index)
+       this.$router.push("shopping")
+    }
   }
 }
 </script>

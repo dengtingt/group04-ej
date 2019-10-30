@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Manager from '../pages/manager/Layout.vue'
+// import Shopping from '../pages/manager/Shopping.vue'
+// import confirmOrder from '../pages/manager/confirmOrder.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+   {
+    path: '/login',
+    name: 'login',
+    component: () => import('../pages/Login.vue')
+  },
   {
     path: '/',
     name: 'manager',
@@ -18,12 +25,30 @@ const routes = [
     },{
       path:"user",
       component:() => import('../pages/manager/User.vue')
+// <<<<<<< HEAD
+    },
+    {
+      path: '/Shopping',
+      name: 'shopping',
+      component: () => import('../pages/manager/Shopping.vue')
+// =======
     }]
+// >>>>>>> b492103a0a829afa4326104da6777a44d6e4f621
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('../pages/Login.vue')
+    path:"/address",
+    name: 'address',
+    component:() => import('../pages/manager/Address.vue')
+  },
+  {
+    path:"/editAddress",
+    name: 'editAddress',
+    component:() => import('../pages/manager/editAddress.vue')
+  },
+  {
+    path: '/confirmOrder',
+    name: 'confirmOrder',
+    component: () => import('../pages/manager/confirmOrder.vue')
   }
 ]
 

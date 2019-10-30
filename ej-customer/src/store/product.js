@@ -5,7 +5,8 @@ export default {
   state:{
     products:[],
     visible:false,
-    title:"添加产品信息"
+    title:"添加产品信息",
+    // product:{}
   },
   getters:{
     productSize(state){
@@ -22,7 +23,16 @@ export default {
         })
         return state.products;
       }
-    }
+    },
+    productStatusFilter(state){
+      return function(id){
+          if(id){
+            return state.products.filter(item=>item.categoryId===id)
+          } else {
+            return state.products;
+          }
+     }
+  }
   },
   mutations:{
     showModal(state){
@@ -34,9 +44,12 @@ export default {
     refreshProducts(state,products){
       state.products = products;
     },
+    // refreshProduct(state,product){
+    //   state.product = product;
+    // },
     setTitle(state,title){
       state.title = title;
-    }
+    },
   },
   actions:{
     async batchDeleteProduct(context,ids){
@@ -58,6 +71,14 @@ export default {
       // 2. 将查询结果更新到state中
       context.commit("refreshProducts",response.data);
     },
+    // async queryproduct(context,params){
+    //   // 1. ajax查询
+    //   let response = await post("/product/queryProductCascadeCategory",params);
+    //   // 2. 将查询结果更新到state中
+    //   context.commit("refreshProduct",response.data);
+     
+    // },
+
     // payload 顾客信息
     async saveOrUpdateProduct({commit,dispatch},payload){
       // 1. 保存或更新
