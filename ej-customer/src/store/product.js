@@ -68,7 +68,6 @@ export default {
     async findAllProducts(context){
       // 1. ajax查询
       let response = await get("/product/findAll");
-      console.log(response.data)
       // 2. 将查询结果更新到state中
       context.commit("refreshProducts",response.data);
     },

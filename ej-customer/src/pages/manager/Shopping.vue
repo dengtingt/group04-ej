@@ -15,8 +15,9 @@
           </van-sidebar>
       </div>
       <!-- 右侧 -->
+        
       <div class="right">
-       <van-card  v-for="item in prodcut" :key="item.id"
+       <van-card  v-for="item in product" :key="item.id" 
                 :price='item.price'
                 :desc="item.description"  
                 :title="item.name"
@@ -37,21 +38,23 @@
       <van-submit-bar :price=0 button-text="立即下单" @submit="orderform">    
       </van-submit-bar>
     </div>
+     
   </div>
 </template>
 <script>
 import {mapState,mapActions,mapGetters,mapMutations} from 'vuex'
 export default {
   created(){
-    
     // this.categoryId = this.categories[index].id;
       this.findAllCategories();
-      this.findAllProducts();
-      this.prodcut=this.productStatusFilter(this.categories[this.activeKey].id)
+      this.findAllProducts().then(()=>{
+        this.product=this.productStatusFilter(this.categories[this.activeKey].id)
+      })
+      
   },
   data() {
     return {  
-      prodcut:[],
+      product:[],
       value: 1
     }
   },
@@ -60,7 +63,7 @@ export default {
     ...mapActions("category",["findAllCategories"]),
     ...mapMutations("shopping",["categoryindex"]),
      findProductsHandler(index,id){
-      this.prodcut=this.productStatusFilter(id)
+      this.product=this.productStatusFilter(id)
       this.categoryindex(index)
     },
      orderform(){
@@ -68,7 +71,12 @@ export default {
      },
      onClickLeft(){
        this.$router.back();
-     }
+     },
+    //  bianli(){
+    //    this.product.forEach(function(item){
+    //     console.log(item)
+    //    })
+    //  }
    },
   computed: {
     ...mapGetters("product",["productStatusFilter"]),

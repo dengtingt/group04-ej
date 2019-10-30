@@ -47,8 +47,7 @@ export default {
         if(res.status === 200){
           this.$router.push("home")
         }else{
-          alert("用户名或密码错误，请重新输入")
-          this.user={}
+          alert("用户名或者密码错误，请重新输入")
         }
       })
     }

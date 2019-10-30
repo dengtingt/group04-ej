@@ -14,8 +14,10 @@
             <van-col span="6"><van-icon name="location-o"  size="2em"/></van-col>
             <van-col span="18">
                 <div class="label">服务地址</div>
-                <div class="label">姓名</div>
-                <div class="label">地址</div>
+                <div class="label">{{info.name}}</div>
+                <div class="label" @click="addressHandler">
+                    {{address[0].province}}{{address[0].city}}{{address[0].area}}{{address[0].address}}
+                </div>
             </van-col>
         </van-row>
         <br>
@@ -63,6 +65,7 @@
 </div>
 </template>
 <script>
+import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
 export default {
     data() {
         return {
@@ -72,13 +75,21 @@ export default {
     methods: {
         onClickLeft(){
             this.$router.back();
-        }
+        },
+        addressHandler(){
+        this.$router.push('./address');
+      },
+        ...mapActions("user",["findUser"]),
+        ...mapActions("address",["findAddressByCustomerId"]),
     },
     computed: {
-        
+      ...mapState("user",["info"]),
+      ...mapState("login",["token"]),
+       ...mapState("address",["address"])
     },
     created() {
-        
+        this.findUser(this.token),
+        this.findAddressByCustomerId(this.info.id);
     },
 }
 </script>
