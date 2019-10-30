@@ -14,13 +14,28 @@
   </div>
 </template>
 <script>
+import {mapState,mapActions} from 'vuex'
 export default {
   data(){
     return {
       active:0
     }
   },
+  created(){
+    if(this.token){
+      this.getinfo(this.token);
+    }else{
+      this.$toast("token失效")
+      this.$router.push("./login")
+    }
+  },
+  computed:{
+    ...mapState("user",["token",'info'])
+  },
   methods:{
+    ...mapActions("user",{
+      'getinfo':'info'
+    }),
     tabChangeHandler(path){
       this.$router.push({path})
     }
