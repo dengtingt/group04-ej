@@ -52,8 +52,10 @@ export default {
       },
       // 退出登录
       logoutHandler(){
-        this.logout();
-        this.$router.push('../login');
+        this.logout()
+        .then(()=>{
+          this.$router.push({path:'/login'})
+        })
       }
     }
 }

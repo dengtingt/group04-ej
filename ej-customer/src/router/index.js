@@ -32,11 +32,18 @@ const routes = [
       name: 'shopping',
       component: () => import('../pages/manager/Shopping.vue')
 // =======
-    },{
-      path:"address",
-      component:() => import('../pages/manager/Address.vue')
     }]
 // >>>>>>> b492103a0a829afa4326104da6777a44d6e4f621
+  },
+  {
+    path:"/address",
+    name: 'address',
+    component:() => import('../pages/manager/Address.vue')
+  },
+  {
+    path:"/editAddress",
+    name: 'editAddress',
+    component:() => import('../pages/manager/editAddress.vue')
   },
   {
     path: '/confirmOrder',

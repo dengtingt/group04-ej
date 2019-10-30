@@ -5,7 +5,7 @@
             <van-row gutter="10">
                 <!-- 返回 -->
                 <van-col span="4"  @click.prevent="backHandler">
-                    <van-icon custom-class="icon" name="arrow-left" /> 
+                    <van-icon custom-class="icon" name="arrow-left" class="back"/> 
                     <a href=""> 返回</a>
                 </van-col>
                 <!-- 标题 -->
@@ -21,7 +21,7 @@
                         <van-row gutter="10">
                             <!-- 复选框 -->
                             <van-col span="2">
-                                <van-checkbox icon-size="14px" value="checked" checked-color="#07c160" bind:change="onChange"></van-checkbox>
+                                <van-checkbox class="check" icon-size="14px" value="checked" checked-color="#07c160" bind:change="onChange"></van-checkbox>
                             </van-col>
                             <!-- 信息列表 -->
                             <van-col span="18">
@@ -29,12 +29,17 @@
                                 <p>{{address[0].province}}{{address[0].city}}{{address[0].area}}{{address[0].address}}</p>
                             </van-col>
                             <!-- 图标 -->
-                            <van-col span="1" offset="2"><van-icon size="16px" name="edit" @click="editAddress"/></van-col>
+                            <van-col class="edit" span="1" offset="2"><van-icon size="16px" name="edit" @click="editAddress"/></van-col>
                         </van-row>
                     </van-cell>
                 </van-cell-group>
             </van-checkbox-group>
         </div>
+        <!-- 确认按钮 -->
+        <div class="btn" @click="saveHandler">
+            <div>确认</div>
+        </div>
+
     </div>
 </template>
 
@@ -43,7 +48,7 @@ import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
 export default {
     data(){
         return{
-
+            
         }
     },
     created() {
@@ -69,7 +74,10 @@ export default {
             this.$router.push('./user');
         },
         editAddress(){
-            alert("修改地址");
+            this.$router.push('./editAddress');
+        },
+        saveHandler(){
+            this.$router.push('./user');
         }
     }
 }
@@ -94,6 +102,7 @@ export default {
     }
 
     .header {
+        position: relative;
         box-sizing: border-box;
         padding: 10px 20px;
         line-height: 1.5em;
@@ -102,8 +111,33 @@ export default {
     .header a{
         color: #1E90FF;
         font-size: 14px;
+        position: absolute;
+        left: 40px;
     }
     .header p{
+        text-align: center;
+    }
+    .back {
+        color: #1E90FF;
+        position:absolute;
+        top: 13px;
+    }
+    .check{
+        margin-top: 15px;
+    }
+    .edit {
+        margin-top: 15px;
+    }
+
+    .btn{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: #EE2C2C;
+        color: #fff;
+    }
+    .btn div {
+        line-height: 3em;
         text-align: center;
     }
 </style>
