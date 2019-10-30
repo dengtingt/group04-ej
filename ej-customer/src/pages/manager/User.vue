@@ -2,7 +2,9 @@
   <div class="user">
     <!-- 标题 -->
     <div class="title">
-        我的
+        <van-nav-bar
+          title="我的"
+        />
     </div>
     <!-- 用户信息显示 -->
     <div class="photo">
@@ -10,18 +12,18 @@
         <p>{{info.name}}</p>
     </div>
     <!-- 地址信息 -->
-    <div class="address" @click.prevent="addressHandler">
-      <van-row gutter="20">
-        <van-col span="8"><a href="">常用地址</a></van-col>
-        <van-col span="2" offset="12"><van-icon name="arrow" /></van-col>
-      </van-row>
+    <div class="address" @click="addressHandler">
+      <van-cell
+        is-link
+        title="常用地址"
+      />
     </div>
     <!-- 退出登录 -->
-    <div class="logout" @click.prevent="logoutHandler">
-        <van-row gutter="20">
-          <van-col span="8"><a href="">退出</a></van-col>
-          <van-col span="2" offset="12"><van-icon name="arrow" /></van-col>
-        </van-row>
+    <div class="logout" @click="logoutHandler">
+        <van-cell
+          is-link
+          title="退出"
+        />
     </div>
   </div>
 </template>
@@ -44,9 +46,9 @@ export default {
     methods:{
       // 映射，将vuex action中得到的动作映射为vue中的方法
       ...mapActions("user",["findUser","logout"]),
-      // 地址信息跳转
+      // 
       addressHandler(){
-        this.$router.push('./address');
+        this.$router.push({path:'./address'})
       },
       // 退出登录
       logoutHandler(){
@@ -77,11 +79,6 @@ export default {
         color: #333;
     }
 
-    .title{
-        line-height: 3em;
-        text-align: center;
-        border-bottom: 1px solid #efefef;
-    }
     .photo img{
       position: relative;
       left: -60px;

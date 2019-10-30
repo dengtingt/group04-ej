@@ -2,29 +2,53 @@
     <div class="editAddress">
         <!-- 头部 -->
         <div class="header">
-            <van-row gutter="10">
-                <!-- 返回 -->
-                <van-col span="4"  @click.prevent="backHandler">
-                    <van-icon custom-class="icon" name="arrow-left" class="back"/> 
-                    <a href=""> 返回</a>
-                </van-col>
-                <!-- 标题 -->
-                <van-col span="11" offset="3"><p>修改地址</p></van-col>
-            </van-row>
+            <div class="header">
+                <van-nav-bar
+                    :title="title"
+                    left-text="返回"
+                    left-arrow
+                    @click-left="backHandler"
+                />
+            </div>
+        </div>
+        <!-- 内容 -->
+        <div class="content">
+            <van-address-edit
+                :area-list="areaList"
+                show-delete
+                show-set-default
+                @save="onSave"
+                @delete="onDelete"
+            />
         </div>
     </div>
 </template>
 
 <script>
+import { mapActions,mapState } from 'vuex';
+import areaList from '../../utils/areaList.js'
 export default {
     data(){
         return{
-
+            title:"修改地址",
+            areaList,
+            content:{}
         }
     },
+    computed:{
+      // 映射，将vuex state中的状态映射为vue中的属性
+      ...mapState("address",["addresses","saveAddress"])
+    },
     methods:{
+        ...mapActions("editAddress",["deleteAddressById"]),
         backHandler(){
             this.$router.push('./address');
+        },
+        onSave() {
+            saveAddress(this.content);
+        },
+        onDelete() {
+            deleteAddressById(this.address.id);
         }
     }
 }
@@ -48,20 +72,4 @@ export default {
         color: #333;
     }
 
-    .header {
-        position: relative;
-        box-sizing: border-box;
-        padding: 10px 20px;
-        line-height: 1.5em;
-        border-bottom: 1px solid #efefef;
-    }
-    .header a{
-        color: #1E90FF;
-        font-size: 14px;
-        position: absolute;
-        left: 40px;
-    }
-    .header p{
-        text-align: center;
-    }
 </style>
