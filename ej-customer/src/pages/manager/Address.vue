@@ -31,7 +31,7 @@ import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
 export default {
     data(){
         return{
-            chosenAddressId: '0',
+            chosenAddressId: '1',
         }
     },
     created() {
@@ -41,16 +41,22 @@ export default {
     computed:{
       // 映射，将vuex state中的状态映射为vue中的属性
       ...mapState("user",["info"]),
-      ...mapState("address",["addresses"])
+      ...mapState("address",["addresses"]),
+      ...mapState("editAddress",["title","content"]),
     },
     methods:{
         // 映射，将vuex action中得到的动作映射为vue中的方法
         ...mapActions("user",["findUser"]),
         ...mapActions("address",["findAddressByCustomerId","findCustomer"]),
         onAdd() {
+            // this.setTitle("添加地址");
             this.$router.push('./editAddress');
         },
         onEdit(item, index) {
+            this.content.id = item.id;
+            this.content.name = item.name;
+            this.content.tel = item.tel;
+            this.content.address = item.address;
             this.$router.push('./editAddress');
         },
         backHandler(){

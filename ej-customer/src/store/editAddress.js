@@ -1,8 +1,9 @@
-import {get} from '../http/axios'
+import {get,post} from '../http/axios'
 export default {
   namespaced:true,
   state:{
-    
+    title:"修改地址",
+    content:{}
   },
   mutations:{
     
@@ -10,7 +11,7 @@ export default {
   actions:{
     // 删除
     async deleteAddressById({dispatch},id){
-      // 1. 删除顾客信息
+      // 1. 删除地址信息
       let response = await get("/address/deleteById?id="+id);
       // 3. 提示成功
       return response;

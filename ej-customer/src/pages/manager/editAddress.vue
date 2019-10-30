@@ -14,6 +14,7 @@
         <!-- 内容 -->
         <div class="content">
             <van-address-edit
+                :model="content"
                 :area-list="areaList"
                 show-delete
                 show-set-default
@@ -30,25 +31,41 @@ import areaList from '../../utils/areaList.js'
 export default {
     data(){
         return{
-            title:"修改地址",
-            areaList,
-            content:{}
+            areaList
         }
     },
     computed:{
       // 映射，将vuex state中的状态映射为vue中的属性
-      ...mapState("address",["addresses","saveAddress"])
+      ...mapState("address",["addresses"]),
+      ...mapState("user",["info"]),
+      ...mapState("editAddress",["title","content"])
     },
     methods:{
-        ...mapActions("editAddress",["deleteAddressById"]),
+        ...mapActions("editAddress",["deleteAddressById","saveAddress"]),
         backHandler(){
             this.$router.push('./address');
         },
-        onSave() {
-            saveAddress(this.content);
+        onSave(e) {
+            let data = {};
+            data.tel = e.tel;
+            data.province = e.province;
+            data.city = e.city;
+            data.area = e.county;
+            data.address = e.addressDetail;
+            data.customerId = this.info.id;
+            console.log(data)
+            this.saveAddress(data)
+            .then((response)=>{
+                // this.$message({type:"success",message:response.statusText});
+                this.$router.push('./address');
+            })
         },
         onDelete() {
-            deleteAddressById(this.address.id);
+            this.deleteAddressById(this.addresses.id)
+            .then((response)=>{
+                // this.$message({type:"success",message:response.statusText});
+                this.$router.push('./address');
+            })
         }
     }
 }
