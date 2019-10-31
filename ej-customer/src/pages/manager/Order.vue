@@ -42,7 +42,6 @@
 
 <script>
 import { mapState,mapGetters, mapActions } from 'vuex';
-import moment from "moment";
 export default {
   data(){
     return{
@@ -59,10 +58,6 @@ export default {
   },
   methods:{
     ...mapActions("order",["findAllOrder","deleteOrder","confirmOrder"]),
-    // 将时间戳转换为日期
-    orderTime(item){
-      return moment(item).format("YYYY-MM-DD HH:mm:ss")
-    },
     // 标签页切换
     onChange(event) {
       wx.showToast({

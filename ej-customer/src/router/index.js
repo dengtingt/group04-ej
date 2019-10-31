@@ -58,6 +58,11 @@ const routes = [
       path: '/Shopping',
       name: 'shopping',
       component: () => import('../pages/manager/Shopping.vue')
+    },
+    {
+      path: '/Comment',
+      name: 'comment',
+      component: () => import('../pages/manager/Comment.vue')
     }]
   },
   

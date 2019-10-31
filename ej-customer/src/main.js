@@ -8,7 +8,9 @@ import './assets/iconfont/iconfont.css'
 
 // 组件
 import OrderItem from './components/OrderItem'
+import FullLayout from './components/FullLayout'
 Vue.component('briup-order-item',OrderItem)
+Vue.component('briup-fulllayout',FullLayout)
 Vue.prototype.$moment = moment;
 
 // 全局注册过滤器
