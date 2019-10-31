@@ -21,6 +21,14 @@ export default {
         async findAllOrder(context,customerId){
             let response = await get("/order/query?customerId="+customerId)
             context.commit("refreshAllOrders",response.data)
+        },
+        async deleteOrder(context,id){
+            let response = await get("/order/deleteById?id="+id)
+            return response;
+        },
+        async confirmOrder(context,id){
+            let response = await get("/order/confirmOrder?orderId="+id)
+            return response;
         }
     }
 }

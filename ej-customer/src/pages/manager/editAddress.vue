@@ -54,7 +54,6 @@ export default {
             data.area = e.county;
             data.address = e.addressDetail;
             data.customerId = this.info.id;
-            console.log(data)
             this.saveAddress(data)
             .then((response)=>{
                 // this.$message({type:"success",message:response.statusText});

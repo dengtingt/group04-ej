@@ -26,12 +26,13 @@
       <van-tab title="待确认">
         <!-- 待确认订单列表 -->
         <briup-order-item v-for='order in ordersStatusFilter("待确认")' :key="order.id"  :data='order'>
-          <van-button class="btn" round plain type="warning" size="mini" @click="comment">确认服务</van-button>
+          <van-button class="btn" round plain type="warning" size="mini" @click="confirmHandler(order.id)">确认订单</van-button>
         </briup-order-item>
       </van-tab>
       <van-tab title="已完成">
         <!-- 已完成订单列表 -->
         <briup-order-item v-for='order in ordersStatusFilter("已完成")' :key="order.id"  :data='order'>
+          <van-button class="btn" round plain type="info" size="mini" @click="deleteHandler(order.id)">删除订单</van-button>
           <van-button class="btn" round plain type="warning" size="mini" @click="comment">评价</van-button>
         </briup-order-item>
       </van-tab>
@@ -57,7 +58,7 @@ export default {
     this.findAllOrder(this.info.id)
   },
   methods:{
-    ...mapActions("order",["findAllOrder"]),
+    ...mapActions("order",["findAllOrder","deleteOrder","confirmOrder"]),
     // 将时间戳转换为日期
     orderTime(item){
       return moment(item).format("YYYY-MM-DD HH:mm:ss")
@@ -69,8 +70,24 @@ export default {
         icon: 'none'
       });
     },
+    // 评价
     comment(){
       alert("评价")
+    },
+    // 删除订单
+    deleteHandler(id){
+      this.deleteOrder(id)
+      .then(()=>{
+        this.findAllOrder(this.info.id)
+      })
+      
+    },
+    // 确认订单
+    confirmHandler(id){
+      this.confirmOrder(id)
+      .then(()=>{
+        this.findAllOrder(this.info.id)
+      })
     }
   }
 }
