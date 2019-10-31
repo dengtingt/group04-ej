@@ -10,27 +10,29 @@
     <van-tabs :active="active" bind:change="onChange">
       <van-tab title="全部订单">
         <!-- 全部订单列表 -->
-        <div class="allOrder" v-for="item in AllOrders" :key="item.id">
-          <van-row>
-            <van-col span="7"><img src="https://img.yzcdn.cn/vant/t-thirt.jpg" alt=""></van-col>
-            <van-col span="15">
-              <p>下单时间：{{orderTime(item.orderTime)}}</p>
-              <p>总额：￥{{item.total}}</p>
-              <p>进度：{{item.status}}</p>
-            </van-col>
-          </van-row>
-        </div>
+        <briup-order-item v-for='order in AllOrders' :key="order.id"  :data='order'></briup-order-item>
       </van-tab>
-      <van-tab title="待付款">内容 2</van-tab>
-      <van-tab title="待服务">内容 3</van-tab>
-      <van-tab title="待确认">内容 4</van-tab>
-      <van-tab title="已完成">内容 5</van-tab>
+      <van-tab title="待支付">
+        <!-- 待支付订单列表 -->
+        <briup-order-item v-for='order in ordersStatusFilter("待支付")' :key="order.id"  :data='order'></briup-order-item>
+      </van-tab>
+      <van-tab title="待服务">
+        <briup-order-item v-for='order in ordersStatusFilter("待派单")' :key="order.id"  :data='order'></briup-order-item>
+         <briup-order-item v-for='order in ordersStatusFilter("待接单")' :key="order.id"  :data='order'></briup-order-item>
+         <briup-order-item v-for='order in ordersStatusFilter("待服务")' :key="order.id"  :data='order'></briup-order-item>
+        <!-- 待确认订单列表 -->
+        <briup-order-item v-for='order in ordersStatusFilter("待确认")' :key="order.id"  :data='order'></briup-order-item>
+      </van-tab>
+      <van-tab title="已完成">
+        <!-- 已完成订单列表 -->
+        <briup-order-item v-for='order in ordersStatusFilter("已完成")' :key="order.id"  :data='order'></briup-order-item>
+      </van-tab>
     </van-tabs>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState,mapGetters, mapActions } from 'vuex';
 import moment from "moment";
 export default {
   data(){
@@ -40,7 +42,8 @@ export default {
   },
   computed:{
     ...mapState("order",["AllOrders"]),
-    ...mapState("user",["info"])
+    ...mapState("user",["info"]),
+    ...mapGetters('order',['ordersStatusFilter'])
   },
   created() {
     this.findAllOrder(this.info.id)
@@ -82,6 +85,7 @@ export default {
 
     .order{
       margin-bottom: 50px;
+      background: #f1f1f1;
     }
     .title{
       position: sticky;
@@ -93,7 +97,10 @@ export default {
       padding: 10px;
       border-bottom: 1px solid #efefef;
       font-size: 12px;
-      line-height: 2em
+      line-height: 2em;
+      margin: 3px;
+      background: #fff;
+      border-radius: 8px;
     }
     img{
       width: 100px;

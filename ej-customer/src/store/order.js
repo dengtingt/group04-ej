@@ -5,7 +5,12 @@ export default {
         AllOrders:[]
     },
     getters:{
-        
+        // 根据订单状态进行过滤
+        ordersStatusFilter(state){
+            return (status)=>{
+                return state.AllOrders.filter(AllOrders=>AllOrders.status === status)
+            }
+        }
     },
     mutations:{
         refreshAllOrders(state,AllOrders){

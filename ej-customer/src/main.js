@@ -4,7 +4,19 @@ import router from './router'
 import store from './store'
 import './plugins/vant.js'
 import moment from "moment";
+
+// 组件
+import OrderItem from './components/OrderItem'
+Vue.component('briup-order-item',OrderItem)
 Vue.prototype.$moment = moment;
+
+// 全局注册过滤器
+Vue.filter('datefmt',function(val){
+  if(val){
+    return moment(val).format('YYYY-MM-DD HH:mm:ss')
+  }
+  return val;
+})
 
 Vue.config.productionTip = false
 
