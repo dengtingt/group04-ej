@@ -53,11 +53,12 @@ export default {
             this.$router.push('./editAddress');
         },
         onEdit(item, index) {
-            this.content.id = item.id;
-            this.content.name = item.name;
-            this.content.tel = item.tel;
-            this.content.address = item.address;
-            this.$router.push('./editAddress');
+           
+            // this.content.id = item.id;
+            // this.content.name = item.name;
+            // this.content.tel = item.tel;
+            // this.content.address = item.address;
+            this.$router.push('./editAddress/'+item.id);
         },
         backHandler(){
             this.$router.push('./user');

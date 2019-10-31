@@ -45,17 +45,19 @@
 import {mapState,mapActions,mapGetters,mapMutations} from 'vuex'
 export default {
   created(){
+    this.activeKey = this.activeKeys
     // this.categoryId = this.categories[index].id;
       this.findAllCategories();
       this.findAllProducts().then(()=>{
-        this.product=this.productStatusFilter(this.categories[this.activeKey].id)
+         this.product=this.productStatusFilter(this.categories[this.activeKey].id)
       })
-      
+     
   },
   data() {
     return {  
       product:[],
-      value: 1
+      value: 1,
+      activeKey:0
     }
   },
   methods: {
@@ -82,7 +84,7 @@ export default {
     ...mapGetters("product",["productStatusFilter"]),
     ...mapState("product",["products"]),
     ...mapState("category",["categories"]),
-    ...mapState("shopping",["activeKey"]),
+    ...mapState("shopping",["activeKeys"]),
    
     }
   

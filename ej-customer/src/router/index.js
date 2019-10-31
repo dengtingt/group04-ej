@@ -41,7 +41,7 @@ const routes = [
     component:() => import('../pages/manager/Address.vue')
   },
   {
-    path:"/editAddress",
+    path:"/editAddress/:item",
     name: 'editAddress',
     component:() => import('../pages/manager/editAddress.vue')
   },

@@ -10,6 +10,7 @@ import login from './login'
 import shopping from './shopping'
 import user from './user'
 import editAddress from './editAddress'
+import order from './order'
 
 export default new Vuex.Store({
   modules:{
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     shopping,
     login,
     user,
-    editAddress
+    editAddress,
+    order
   }
 })

@@ -35,6 +35,7 @@ export default {
         }
     },
     computed:{
+      
       // 映射，将vuex state中的状态映射为vue中的属性
       ...mapState("address",["addresses"]),
       ...mapState("user",["info"]),
@@ -67,7 +68,11 @@ export default {
                 this.$router.push('./address');
             })
         }
-    }
+    },
+    created() {
+          let address = this.$route.params.item;
+          console.log(address)
+    },
 }
 </script>
 
