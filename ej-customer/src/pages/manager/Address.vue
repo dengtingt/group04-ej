@@ -58,7 +58,7 @@ export default {
             // this.content.name = item.name;
             // this.content.tel = item.tel;
             // this.content.address = item.address;
-            this.$router.push('./editAddress/'+item.id);
+            this.$router.push('./editAddress');
         },
         backHandler(){
             this.$router.push('./user');

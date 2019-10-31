@@ -21,8 +21,8 @@
           </van-row>
         </div>
       </van-tab>
-      <van-tab title="未付款">内容 2</van-tab>
-      <van-tab title="未服务">内容 3</van-tab>
+      <van-tab title="待付款">内容 2</van-tab>
+      <van-tab title="待服务">内容 3</van-tab>
       <van-tab title="待确认">内容 4</van-tab>
       <van-tab title="已完成">内容 5</van-tab>
     </van-tabs>
@@ -40,16 +40,18 @@ export default {
   },
   computed:{
     ...mapState("order",["AllOrders"]),
-    ...mapState("user",["info"]),
+    ...mapState("user",["info"])
   },
   created() {
     this.findAllOrder(this.info.id)
   },
   methods:{
     ...mapActions("order",["findAllOrder"]),
+    // 将时间戳转换为日期
     orderTime(item){
       return moment(item).format("YYYY-MM-DD HH:mm:ss")
     },
+    // 标签页切换
     onChange(event) {
       wx.showToast({
         title: `切换到标签 ${event.detail.name}`,

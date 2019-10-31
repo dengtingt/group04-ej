@@ -4,6 +4,9 @@ export default {
     state:{
         AllOrders:[]
     },
+    getters:{
+        
+    },
     mutations:{
         refreshAllOrders(state,AllOrders){
             state.AllOrders = AllOrders;

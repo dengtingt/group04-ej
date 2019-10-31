@@ -70,7 +70,7 @@ export default {
         }
     },
     created() {
-          let address = this.$route.params.item;
+        //   let address = this.$route.params.item;
     },
 }
 </script>

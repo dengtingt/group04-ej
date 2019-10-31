@@ -30,7 +30,7 @@ export default{
 
         // 获取用户信息
         async findUser(context,token){
-            let response = await get("/user/info",{token});
+            let response = await get("/user/info",{token})
             // 将用户信息设置到info中
             context.commit("refreshInfo",response.data)
         },
