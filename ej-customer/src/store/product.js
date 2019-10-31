@@ -6,6 +6,7 @@ export default {
     products:[],
     visible:false,
     title:"添加产品信息",
+    shopcar:[],
     // product:{}
   },
   getters:{
@@ -32,6 +33,14 @@ export default {
             return state.products;
           }
      }
+  },
+  shopprice(state){
+    console.log(state.shopcar)
+    let total = 0 ;
+    state.shopcar.forEach((item)=>{
+      total+= (item.number * item.price*100)
+    }); 
+    return total;
   }
   },
   mutations:{
@@ -50,6 +59,21 @@ export default {
     setTitle(state,title){
       state.title = title;
     },
+    shopcard(state,line){
+      let flag = state.shopcar.some(res=>
+        res.productId===line.productId
+      )
+      // let flag = state.shopcar.some(item=>item.productId === line.productId)
+      if(flag){
+        state.shopcar.forEach(res=>{
+          if(res.productId===line.productId){
+            res.number = line.number;
+          }
+        })  
+      }else{
+        state.shopcar.push(line);
+      }
+    }
   },
   actions:{
     async batchDeleteProduct(context,ids){
@@ -68,17 +92,12 @@ export default {
     async findAllProducts(context){
       // 1. ajax查询
       let response = await get("/product/findAll");
+        response.data.forEach(item => {
+          item.number = 0;
+      });
       // 2. 将查询结果更新到state中
       context.commit("refreshProducts",response.data);
     },
-    // async queryproduct(context,params){
-    //   // 1. ajax查询
-    //   let response = await post("/product/queryProductCascadeCategory",params);
-    //   // 2. 将查询结果更新到state中
-    //   context.commit("refreshProduct",response.data);
-     
-    // },
-
     // payload 顾客信息
     async saveOrUpdateProduct({commit,dispatch},payload){
       // 1. 保存或更新

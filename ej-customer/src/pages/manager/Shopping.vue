@@ -25,7 +25,7 @@
                 style=" background-color:#ffffff;"
               >
               <div slot="num">
-                 <van-stepper v-model="value" />
+                 <van-stepper v-model="item.number" :min="0" @change="ChangerHandler(item)"/>
                 </div>
                 <div slot="tags" style=" border-buttom:1px soild #ededed;">
                   <van-tag plain type="danger">{{item.status}}</van-tag>
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div>
-      <van-submit-bar :price=0 button-text="立即下单" @submit="orderform">    
+      <van-submit-bar  :price="shopprice" button-text="立即下单" @submit="orderform">    
       </van-submit-bar>
     </div>
      
@@ -56,14 +56,14 @@ export default {
   data() {
     return {  
       product:[],
-      value: 1,
-      activeKey:0
+      activeKey:0,
     }
   },
   methods: {
     ...mapActions("product",["findAllProducts"]),
     ...mapActions("category",["findAllCategories"]),
     ...mapMutations("shopping",["categoryindex"]),
+    ...mapMutations("product",["shopcard"]),
      findProductsHandler(index,id){
       this.product=this.productStatusFilter(id)
       this.categoryindex(index)
@@ -74,6 +74,15 @@ export default {
      onClickLeft(){
        this.$router.back();
      },
+     ChangerHandler(item){
+       let line = {
+        productId:item.id,
+        productName:item.name,
+        price:item.price,
+        number:item.number
+      }
+      this.shopcard(line);
+     }
     //  bianli(){
     //    this.product.forEach(function(item){
     //     console.log(item)
@@ -81,7 +90,7 @@ export default {
     //  }
    },
   computed: {
-    ...mapGetters("product",["productStatusFilter"]),
+    ...mapGetters("product",["productStatusFilter","shopprice"]),
     ...mapState("product",["products"]),
     ...mapState("category",["categories"]),
     ...mapState("shopping",["activeKeys"]),
