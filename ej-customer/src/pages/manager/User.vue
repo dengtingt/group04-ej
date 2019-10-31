@@ -79,6 +79,10 @@ export default {
         color: #333;
     }
 
+    .user{
+      overflow-x: hidden;
+    }
+
     .photo img{
       position: relative;
       left: -60px;

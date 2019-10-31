@@ -2,8 +2,7 @@ import {get,post} from '../http/axios'
 export default {
   namespaced:true,
   state:{
-    title:"修改地址",
-    content:{}
+    title:"修改地址"
   },
   mutations:{
     

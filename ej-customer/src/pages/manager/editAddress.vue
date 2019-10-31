@@ -44,7 +44,7 @@ export default {
     methods:{
         ...mapActions("editAddress",["deleteAddressById","saveAddress"]),
         backHandler(){
-            this.$router.push('./address');
+            this.$router.push('../address');
         },
         onSave(e) {
             let data = {};
@@ -71,7 +71,6 @@ export default {
     },
     created() {
           let address = this.$route.params.item;
-          console.log(address)
     },
 }
 </script>
