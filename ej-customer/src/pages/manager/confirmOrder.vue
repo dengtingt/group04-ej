@@ -15,9 +15,9 @@
         <van-col :span="18" class="line-right">
           <div class="label">服务地址</div>
           <div @click="addressHandler">
-            {{realname}} {{address[0].telephone}}
+            {{realname}} {{address.telephone}}
             <br>
-           {{address[0].province}}{{address[0].city}}{{address[0].area}}{{address[0].address}}
+           {{address.province}}{{address.city}}{{address.area}}{{address.address}}
           </div>
         </van-col>
       </van-row>
@@ -29,16 +29,16 @@
         <van-col :span="18" class="line-right">
           <div class="label">订单详情</div>
           <div>
-            <van-row>
-              <van-col :span="8"></van-col>
-              <van-col :span="4"></van-col>
-              <van-col :span="4">x</van-col>
-              <van-col :span="8">￥</van-col>
+            <van-row v-for="line in shopcar" :key="line.productId">
+              <van-col :span="8">{{line.productName}}</van-col>
+              <van-col :span="4">￥{{line.price}}</van-col>
+              <van-col :span="4">x{{line.number}}</van-col>
+              <van-col :span="8">￥{{line.number*line.price}}</van-col>
             </van-row>
             
             <van-row style="border-top:1px dotted #ededed">
               <van-col :span="16"></van-col>
-              <van-col :span="8"></van-col>
+              <van-col :span="8">￥{{shopprice/100}}</van-col>
             </van-row>
             
           </div>
@@ -51,7 +51,8 @@
         </van-col>
         <van-col :span="18" class="line-right">
           <div class="label">服务时间</div>
-          <div>
+          <div @click="()=>{this.show = true}">
+            {{currentDate}}
           </div>
         </van-col>
       </van-row>
@@ -65,9 +66,13 @@
           <div>第三方平台（支付宝）</div>
         </van-col>
       </van-row>
-      <van-popup  position="bottom">
-        <van-datetime-picker type="datetime"/>
+      <van-popup v-model="show" position="bottom">
+        <van-datetime-picker v-model="currentDate" type="datetime"/>
       </van-popup>
+      <!-- 确认订单 -->
+      <div style="position:fixed;bottom:0;width:100%" >
+        <van-button  type="info" size="large" @click="confirmOrderHandler">确认订单</van-button>
+      </div>
     </div>
 </div>
 </template>
@@ -76,6 +81,8 @@ import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
 export default {
     data() {
         return {
+          currentDate:new Date(),
+          show:false
         }
     },
     methods: {
@@ -83,19 +90,41 @@ export default {
             this.$router.back();
         },
         addressHandler(){
-        this.$router.push('./address');
-      },
-     ...mapActions("address",["findAddressByCustomerId","findCustomer"]),
-     ...mapActions("user",["findUser"]),
+            this.$router.push('./address');
+         },
+       confirmOrderHandler(){
+            // 保存订单
+            let order = {
+              customerId:this.info.id,
+              addressId:this.address.id,
+              orderLines:this.shopcar
+            }
+            this.saveOrder(order)
+            .then(()=>{
+              alert("恭喜你,提交成功")
+              this.$router.push("order")
+            });   
     },
+         ...mapActions("address",["findAddressByCustomerId","findCustomer"]),
+         ...mapActions("user",["findUser"]),
+         ...mapActions("order",["saveOrder"])
+    },
+    
     computed: {
+      ...mapState("product",["shopcar"]),
+      ...mapGetters("product",["shopprice"]),
        ...mapState("user",["info","token"]),
-       ...mapState("address",["address","realname"])
+       ...mapState("address",["realname","address"]),
+       ...mapState("order",["message"])
     },
     created() {
+       this.findUser(this.token).then(()=>{
          this.findAddressByCustomerId(this.info.id);
-         this.findUser(this.token)
-         this.findCustomer(this.info.id)
+          this.findCustomer(this.info.id);
+       })
+        
+        
+         
          
     },
 }

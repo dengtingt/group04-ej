@@ -96,7 +96,7 @@ export default {
     ...mapState("shopping",["activeKeys"]),
    
     }
-  
+    
 }
 </script>
 <style scoped>

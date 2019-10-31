@@ -35,7 +35,7 @@ export default {
      }
   },
   shopprice(state){
-    console.log(state.shopcar)
+   
     let total = 0 ;
     state.shopcar.forEach((item)=>{
       total+= (item.number * item.price*100)

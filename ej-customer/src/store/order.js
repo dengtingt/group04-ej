@@ -1,4 +1,4 @@
-import {get} from '../http/axios'
+import {get,post,post_array_dots} from "../http/axios"
 export default {
     namespaced:true,
     state:{
@@ -15,7 +15,10 @@ export default {
     mutations:{
         refreshAllOrders(state,AllOrders){
             state.AllOrders = AllOrders;
-        }
+        },
+        resetMessage(state,message){
+            state.message = message;
+          }
     },
     actions:{
         async findAllOrder(context,customerId){
@@ -29,6 +32,11 @@ export default {
         async confirmOrder(context,id){
             let response = await get("/order/confirmOrder?orderId="+id)
             return response;
-        }
+        },
+        async saveOrder({commit},order){
+            let result = post_array_dots("/order/save",order)
+            console.log()
+            commit("resetMessage",result.statusText);
+        },
     }
 }
