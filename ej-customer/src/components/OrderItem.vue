@@ -1,11 +1,29 @@
 <template>
     <div class="allOrder">
+        <van-row type="flex" justify="space-between">
+            <van-col span="6">
+                <div class="orderId">订单编号：{{data.id}}</div>
+            </van-col>
+            <van-col span="3">
+                <div class="status">{{data.status}}</div>
+            </van-col>
+        </van-row>
         <van-row>
-        <van-col span="7"><img src="https://img.yzcdn.cn/vant/t-thirt.jpg" alt=""></van-col>
+            <van-col span="7"><img src="https://img.yzcdn.cn/vant/t-thirt.jpg" alt=""></van-col>
             <van-col span="15">
                 <p>下单时间：{{data.orderTime | datefmt}}</p>
-                <p>总额：￥{{data.total}}</p>
-                <p>进度：{{data.status}}</p>
+                <p>联系方式：{{data.customer.telephone}}</p>
+                <p>服务地址：{{data.address.province}}{{data.address.city}}{{data.address.area}}{{data.address.address}}</p>
+            </van-col>
+        </van-row>
+        <van-row type="flex" justify="end">
+            <van-col>
+                <div class="total">共 项服务 总额：￥{{data.total}}</div>
+            </van-col>
+        </van-row>
+        <van-row type="flex" justify="end">
+            <van-col>
+                <slot></slot>
             </van-col>
         </van-row>
     </div>
@@ -20,21 +38,43 @@ export default {
 </script>
 
 <style scoped>
+/* 清空基础样式 */
+    html {
+        color: #333;
+        font:normal 12px '微软雅黑','Microsoft YaHei';
+    }
+    body,ul,ol,p {
+        margin: 0;
+        padding: 0;
+    }
+    ul,ol {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+.orderId{
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.status {
+    color: red;
+}
+
 .allOrder{
       box-sizing: border-box;
-      padding: 10px;
+      padding: 8px 10px;
       border-bottom: 1px solid #efefef;
       font-size: 12px;
       line-height: 2em;
-      margin: 3px;
+      margin: 5px;
       background: #fff;
       border-radius: 8px;
     }
     img{
       width: 100px;
       height: 90px;
-    }
-    .allOrder p:nth-child(2){
-      color: red;
     }    
+
 </style>

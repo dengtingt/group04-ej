@@ -8,24 +8,32 @@
     </div>
     <!-- 标签页 -->
     <van-tabs :active="active" bind:change="onChange">
-      <van-tab title="全部订单">
+      <van-tab title="全部">
         <!-- 全部订单列表 -->
         <briup-order-item v-for='order in AllOrders' :key="order.id"  :data='order'></briup-order-item>
       </van-tab>
       <van-tab title="待支付">
         <!-- 待支付订单列表 -->
-        <briup-order-item v-for='order in ordersStatusFilter("待支付")' :key="order.id"  :data='order'></briup-order-item>
+        <briup-order-item v-for='order in ordersStatusFilter("待支付")' :key="order.id"  :data='order'>
+          <van-button class="btn" round plain type="warning" size="mini" @click="comment">支付</van-button>
+        </briup-order-item>
       </van-tab>
       <van-tab title="待服务">
         <briup-order-item v-for='order in ordersStatusFilter("待派单")' :key="order.id"  :data='order'></briup-order-item>
          <briup-order-item v-for='order in ordersStatusFilter("待接单")' :key="order.id"  :data='order'></briup-order-item>
          <briup-order-item v-for='order in ordersStatusFilter("待服务")' :key="order.id"  :data='order'></briup-order-item>
+      </van-tab>
+      <van-tab title="待确认">
         <!-- 待确认订单列表 -->
-        <briup-order-item v-for='order in ordersStatusFilter("待确认")' :key="order.id"  :data='order'></briup-order-item>
+        <briup-order-item v-for='order in ordersStatusFilter("待确认")' :key="order.id"  :data='order'>
+          <van-button class="btn" round plain type="warning" size="mini" @click="comment">确认服务</van-button>
+        </briup-order-item>
       </van-tab>
       <van-tab title="已完成">
         <!-- 已完成订单列表 -->
-        <briup-order-item v-for='order in ordersStatusFilter("已完成")' :key="order.id"  :data='order'></briup-order-item>
+        <briup-order-item v-for='order in ordersStatusFilter("已完成")' :key="order.id"  :data='order'>
+          <van-button class="btn" round plain type="warning" size="mini" @click="comment">评价</van-button>
+        </briup-order-item>
       </van-tab>
     </van-tabs>
   </div>
@@ -60,6 +68,9 @@ export default {
         title: `切换到标签 ${event.detail.name}`,
         icon: 'none'
       });
+    },
+    comment(){
+      alert("评价")
     }
   }
 }
@@ -92,22 +103,11 @@ export default {
       top: 0;
       z-index: 100;
     }
-    .allOrder{
-      box-sizing: border-box;
-      padding: 10px;
-      border-bottom: 1px solid #efefef;
-      font-size: 12px;
-      line-height: 2em;
-      margin: 3px;
-      background: #fff;
-      border-radius: 8px;
-    }
-    img{
-      width: 100px;
-      height: 90px;
-    }
-    .allOrder p:nth-child(2){
-      color: red;
+
+    .btn{
+      width: 70px;
+      height: 25px;
+      margin-top: 10px;
     }
 
 </style>

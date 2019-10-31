@@ -1,30 +1,30 @@
 <template>
   <div id="login">
-    <h2>用户登录页面</h2>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <van-cell-group>
-  <van-field
-    v-model="user.username"
-    required
-    clearable
-    label="用户名"
-    right-icon="question-o"
-    placeholder="请输入用户名"
-    @click-right-icon="$toast('question')"
-  />
-  <van-field
-    v-model="user.password"
-    type="password"
-    label="密码"
-    placeholder="请输入密码"
-    required
-  />
-  <van-button class="login" size="large" type="primary" @click="loginyz">登录</van-button>
-</van-cell-group>
+    <div class="login_header">
+      <div><i class="iconfont icon-swticonjiazheng1"></i></div>
+      <div>家政服务平台·顾客端</div>
+    </div>
+    <div class="background">
+      <van-cell-group class="form">
+        <van-field
+          v-model="user.username"
+          required
+          clearable
+          label="用户名"
+          right-icon="question-o"
+          placeholder="请输入用户名"
+          @click-right-icon="$toast('question')"
+        />
+        <van-field
+          v-model="user.password"
+          type="password"
+          label="密码"
+          placeholder="请输入密码"
+          required
+        />
+        <van-button class="btn" size="large"  plain round type="primary" @click="loginyz">登录</van-button>
+      </van-cell-group>
+    </div>
   </div>
 </template>
 <script>
@@ -55,11 +55,27 @@ export default {
 }
 </script>
 <style>
-  h2{
-    text-align: center;
-    color: blue;
+  .iconfont{
+    font-size: 40px;
   }
-  .login{
-    margin-top:20px ;
+  .login_header{
+    background: #48D1CC;
+    color: #fff;
+    font-size: 26px;
+    text-align: center;
+    padding: 60px;
+  }
+  #login{
+    position: relative;
+  }
+  .background{
+    position: absolute;
+    top: 200px;
+    width: 100%;
+    padding: 50px 0;
+    background: #fff;
+  }
+  .btn{
+    margin-top: 30px;
   }
 </style>

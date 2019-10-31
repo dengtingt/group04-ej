@@ -15,7 +15,7 @@
     <div class="address" @click="addressHandler">
       <van-cell
         is-link
-        title="常用地址"
+        title="我的地址"
       />
     </div>
     <!-- 退出登录 -->
@@ -97,7 +97,6 @@ export default {
       text-align: center;
     }
     .address,.logout{
-        line-height: 3em;
         border-bottom: 1px solid #ededed;
     }
     a{

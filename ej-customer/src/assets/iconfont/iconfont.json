@@ -1,0 +1,30 @@
+{
+  "id": "1486361",
+  "name": "jz_customer",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1119612",
+      "name": "swt-icon-家政 (1)",
+      "font_class": "swticonjiazheng1",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "3785553",
+      "name": "急救箱",
+      "font_class": "jijiuxiang",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "5171076",
+      "name": "厨房用品",
+      "font_class": "-fen-",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    }
+  ]
+}

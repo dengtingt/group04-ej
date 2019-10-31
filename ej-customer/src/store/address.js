@@ -19,7 +19,7 @@ export default {
           let address = {
             id: item.id,
             name: '张三',
-            tel: item.telephone,
+            tel: item.tel,
             address: item.province+""+item.city+""+item.area+""+item.address
           }
           addresses.push(address);

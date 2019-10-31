@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import './plugins/vant.js'
 import moment from "moment";
+import './assets/iconfont/iconfont.css'
 
 // 组件
 import OrderItem from './components/OrderItem'
