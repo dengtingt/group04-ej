@@ -22,22 +22,25 @@ export default {
     }
   },
   created(){
+    this.loadDate();
     if(this.token){
-      this.getinfo(this.token);
+      this.infos(this.token);
     }else{
       this.$toast("token失效")
       this.$router.push("./login")
     }
   },
   computed:{
-    ...mapState("user",["token",'info'])
+    ...mapState("user",["token",'info','']),
   },
   methods:{
-    ...mapActions("user",{
-      'getinfo':'info'
-    }),
+    ...mapActions("user",["infos"]),
+    ...mapActions("order",["loadDate"]),
     tabChangeHandler(path){
       this.$router.push({path})
+    },
+    loadDate(){
+      
     }
   }
 }

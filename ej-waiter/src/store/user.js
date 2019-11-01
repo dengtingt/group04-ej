@@ -24,7 +24,7 @@ export default {
       return response
     },
     //通过token获取信息
-    async info(context,token){
+    async infos(context,token){
       let response = await get("/user/info", {token});
       context.commit("refreshInfo",response.data)
     },
@@ -32,8 +32,8 @@ export default {
     async logout(context){
       await post("/user/logout");
       removeToken();
-      await context.commit('refreshToken',"");
-      await context.commit('refreshInfo',null);
+      context.commit('refreshToken',"");
+      context.commit('refreshInfo',null);
 
     }
   }

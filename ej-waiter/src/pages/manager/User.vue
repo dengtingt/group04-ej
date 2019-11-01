@@ -10,6 +10,9 @@
     <div class="detail" @click="detailHandler"> 
       详细信息  
     </div>
+    <div class="address" @click="AddressManger">
+      地址管理
+    </div>
       <div @click="tabChangeHandler" class="out">
          <van-button type="primary" size="large">退出登录</van-button>
       </div>
@@ -33,6 +36,9 @@ export default {
     },
     detailHandler(){
       this.$router.push("detail");
+    },
+    AddressManger(){
+      this.$router.push("addressMan");
     }
   },
   computed:{
@@ -47,6 +53,7 @@ h2{
 .out{
   margin-bottom: 0%;
   color: darkorange;
+   border-bottom: 2px solid #fff;
 }
 .icon{
   text-align: center;
@@ -67,5 +74,13 @@ h2{
   color: white;
   font-size: border;
   background-color:lightblue;
+  border-bottom: 2px solid #fff;
+}
+.address{
+  height: 50px;
+  line-height: 50px;
+  background-color: lightblue;
+  text-align: center;
+   border-bottom: 2px solid #fff;
 }
 </style>

@@ -8,6 +8,7 @@ Vue.use(VueRouter)
 const routes = [
   {  path:'/',
     redirect:'/login',
+    // path:"/manager",
     name: '/manager',
     component: Manager,
     children:[{
@@ -16,10 +17,12 @@ const routes = [
     },{
       path:"order",
       component:() => import('../pages/manager/Order.vue')
-    },
-    {
+    },{
       path:"detail",
       component:() => import('../pages/manager/detail.vue')
+    },{
+      path:"addressMan",
+      component:() => import('../pages/manager/addressMan.vue')
     },{
       path:"user",
       component:() => import('../pages/manager/User.vue')

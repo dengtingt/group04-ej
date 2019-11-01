@@ -1,8 +1,11 @@
 <template>
   <div>
       <div class="del">
-      详细信息
-  </div>
+     <van-row>
+        <van-col span="9"><van-icon style="margin-left:5px;" name="https://i.52112.com/icon/jpg/256/20190626/45680/2124035.jpg" @click="backHandler"/></van-col>
+        <van-col span="15">详细信息</van-col>
+        </van-row>`
+     </div>
    <div class="tab">
             <van-tabs v-model="active">
                 <van-tab title="ID">{{info.id}}</van-tab>
@@ -30,7 +33,9 @@ export default {
         ...mapState("user",["info"])
     },
     methods:{
-
+        backHandler(){
+            this.$router.push("user")
+        }
     }
 }
 </script>
@@ -40,7 +45,7 @@ export default {
     height: 40px;
     line-height: 40px;
    font-size: 20px;
-   text-align: center;
+   /* text-align: center; */
    background-color: lightblue;
 }
 .tab{

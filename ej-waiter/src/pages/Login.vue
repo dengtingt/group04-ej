@@ -42,7 +42,7 @@ export default {
             message:"success",
             color:"yellow"
           })
-           this.$router.push("home")
+           this.$router.push("/home")
         }else{
           this.$notify({
             message:"用户名或密码错误",

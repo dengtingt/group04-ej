@@ -1,6 +1,10 @@
 <template>
-  <div class="home">
-    首页
+  <div class="home" style="overflow:hidden; height: 100%;
+ width: 100%;">
+    <div class="tp" style="height: 100%;
+ width: 100%;" >
+      <img src="./timg.jpg" alt="">
+    </div>
   </div>
 </template>
 <script>
@@ -11,3 +15,13 @@ export default {
   }
 }
 </script>
+<style>
+.tp{
+  height: 200px;
+  width: 200px;
+}
+img{
+ height: 100%;
+ width: 100%;
+}
+</style>
