@@ -2,12 +2,12 @@ import {get} from '../http/axios'
 export default {
   namespaced:true,
   state:{
-    activeKeys:"",
+    // activeKeys:"",
   },
   mutations:{
-    categoryindex(state,index){
-       state.activeKeys=index
-   }
+  //   categoryindex(state,index){
+  //      state.activeKeys=index
+  //  }
   },
   actions:{
    

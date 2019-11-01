@@ -10,7 +10,7 @@
           :key="c.id"
           :icon="c.icon"
           :text="c.name"
-          @click="searchcategory(index)"
+          @click="searchcategory(c.id,index)"
         />
       </van-grid>
     </van-row>
@@ -27,10 +27,11 @@ export default {
   },
   methods:{
     ...mapActions("category",["findAllCategories"]),
-    ...mapMutations("shopping",["categoryindex"]),
-    searchcategory(index){
-      this.categoryindex(index)
-       this.$router.push("shopping")
+    searchcategory(id,index){
+       this.$router.push({
+         path:"shopping",
+         query:{id,index}
+       })
     }
   }
 }

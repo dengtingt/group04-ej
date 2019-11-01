@@ -18,6 +18,7 @@ const routes = [
   {
     path: '/',
     name: 'manager',
+    redirect:"/login",
     component: Manager,
     beforeEnter: (to, from, next) => {  //属于路由自己的拦截器
       let token = getToken();

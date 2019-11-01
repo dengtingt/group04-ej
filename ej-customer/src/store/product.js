@@ -26,13 +26,11 @@ export default {
       }
     },
     productStatusFilter(state){
-      return function(id){
-          if(id){
-            return state.products.filter(item=>item.categoryId===id)
-          } else {
-            return state.products;
-          }
-     }
+      return (categoryId)=>{
+        return state.products.filter((item)=>{
+          return item.categoryId === categoryId
+        })
+      }
   },
   shopprice(state){
    

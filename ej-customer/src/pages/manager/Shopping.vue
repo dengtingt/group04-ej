@@ -11,13 +11,13 @@
       <!-- 左侧 -->
       <div class="left_nav">
           <van-sidebar v-model="activeKey">
-            <van-sidebar-item :title="c.name" v-for="(c, index ) in categories" :key="c.id" @click="findProductsHandler(index,c.id)"/>
+            <van-sidebar-item :title="c.name" v-for="c in categories" :key="c.id" @click="findProductsHandler(c.id)"/>
           </van-sidebar>
       </div>
       <!-- 右侧 -->
         
       <div class="right">
-       <van-card  v-for="item in product" :key="item.id" 
+       <van-card  v-for="item in productStatusFilter(categoryId) " :key="item.id" 
                 :price='item.price'
                 :desc="item.description"  
                 :title="item.name"
@@ -45,28 +45,25 @@
 import {mapState,mapActions,mapGetters,mapMutations} from 'vuex'
 export default {
   created(){
-    this.activeKey = this.activeKeys
-    // this.categoryId = this.categories[index].id;
       this.findAllCategories();
-      this.findAllProducts().then(()=>{
-         this.product=this.productStatusFilter(this.categories[this.activeKey].id)
-      })
-     
+      this.findAllProducts()
+    let index = this.$route.query.index;
+    this.activeKey = index;
+    this.categoryId = this.$route.query.id
+    console.log(this.productStatusFilter(9302))
   },
   data() {
     return {  
-      product:[],
       activeKey:0,
+      categoryId:0
     }
   },
   methods: {
     ...mapActions("product",["findAllProducts"]),
     ...mapActions("category",["findAllCategories"]),
-    ...mapMutations("shopping",["categoryindex"]),
     ...mapMutations("product",["shopcard"]),
-     findProductsHandler(index,id){
-      this.product=this.productStatusFilter(id)
-      this.categoryindex(index)
+     findProductsHandler(id){
+     this.categoryId = id;
     },
      orderform(){
       this.$router.push("confirmOrder")
