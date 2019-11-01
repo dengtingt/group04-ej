@@ -1,7 +1,7 @@
 <template>
     <div class="allOrder">
         <van-row type="flex" justify="space-between">
-            <van-col span="6">
+            <van-col span="21">
                 <div class="orderId">订单编号：{{data.id}}</div>
             </van-col>
             <van-col span="3">
@@ -18,7 +18,7 @@
         </van-row>
         <van-row type="flex" justify="end">
             <van-col>
-                <div class="total">共 项服务 总额：￥{{data.total}}</div>
+                <div class="total">总额：￥{{data.total}}</div>
             </van-col>
         </van-row>
         <van-row type="flex" justify="end">
@@ -29,7 +29,6 @@
     </div>
 </template>
 <script>
-import moment from "moment";
 export default {
   props:{
     data:{type:Object}

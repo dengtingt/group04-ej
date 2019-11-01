@@ -5,11 +5,13 @@
                 <div class="rate">
                     <!-- 家政服务员信息 -->
                     <div class="waiter">
-                        <img src="" alt="">{{}}
+                        <img :src="order.waiter.photo" alt="">
+                        <p>订单编号：{{order.id}}</p>
+                        <p>服务员工：{{order.waiter.realname}}</p>
                     </div>
                     <!-- 评价 -->
                     <div class="icon">
-                        <van-rate gutter="10px" v-model="value" size="40px" @change="commentHandler"/>
+                        <van-rate gutter="10px" v-model="value" size="40px" @change="commentHandler(value)"/>
                     </div>
                 </div>
                 <div class="btn">
@@ -21,18 +23,29 @@
 </template>
 
 <script>
+import { mapState,mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
-            value: 0
-        };
+            value:0,
+            order:''
+        }
+    },
+    created() {
+        this.order = this.$route.query.order;
     },
     methods:{
+        ...mapActions("comment",["saveComment"]),
         backHandler(){
             this.$router.push('./order');
         },
-        commentHandler(){
-
+        commentHandler(value){
+            let comment = {};
+            comment.id = this.order.id;
+            comment.content = this.value;
+            comment.commentTime = new Date();
+            console.log(comment)
+            this.saveComment(comment);
         }
     }
 }
@@ -74,9 +87,14 @@ export default {
     .waiter img{
         width: 50px;
         height: 50px;
+        border: 1px solid #efefef;
+        margin-right: 10px;
+        float: left;
     }
     .waiter{
         margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 2em;
     }
     .icon{
         text-align: center;

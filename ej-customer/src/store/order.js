@@ -35,8 +35,7 @@ export default {
         },
         async saveOrder({commit},order){
             let result = post_array_dots("/order/save",order)
-            console.log()
             commit("resetMessage",result.statusText);
-        },
+        }
     }
 }

@@ -33,7 +33,7 @@
         <!-- 已完成订单列表 -->
         <briup-order-item v-for='order in ordersStatusFilter("已完成")' :key="order.id"  :data='order'>
           <van-button class="btn" round plain type="info" size="mini" @click="deleteHandler(order.id)">删除订单</van-button>
-          <van-button class="btn" round plain type="warning" size="mini" @click="comment">评价</van-button>
+          <van-button class="btn" round plain type="warning" size="mini" @click="comment(order)">评价</van-button>
         </briup-order-item>
       </van-tab>
     </van-tabs>
@@ -66,8 +66,11 @@ export default {
       });
     },
     // 评价
-    comment(){
-      alert("评价")
+    comment(order){
+      this.$router.push({
+        path:'./comment',
+        query:{order}
+      })
     },
     // 删除订单
     deleteHandler(id){
