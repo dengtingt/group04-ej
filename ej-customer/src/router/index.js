@@ -16,6 +16,11 @@ const routes = [
     component: () => import('../pages/Login.vue')
   },
   {
+    path: '/register',
+    name: 'register',
+    component: () => import('../pages/manager/register.vue')
+  },
+  {
     path: '/',
     name: 'manager',
     redirect:"/login",
@@ -75,7 +80,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

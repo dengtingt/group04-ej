@@ -50,7 +50,7 @@ export default {
     let index = this.$route.query.index;
     this.activeKey = index;
     this.categoryId = this.$route.query.id
-    console.log(this.productStatusFilter(9302))
+    console.log(this.productStatusFilter(this.categoryId))
   },
   data() {
     return {  
@@ -69,7 +69,7 @@ export default {
       this.$router.push("confirmOrder")
      },
      onClickLeft(){
-       this.$router.back();
+       this.$router.go(-1);
      },
      ChangerHandler(item){
        let line = {

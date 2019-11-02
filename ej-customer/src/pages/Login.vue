@@ -23,6 +23,9 @@
           required
         />
         <van-button class="btn" size="large"  plain round type="primary" @click="loginyz">登录</van-button>
+        <br>
+        <br>
+        <van-button class="zhuce" size="normal"  plain  type="info" @click="register">马上注册</van-button>
       </van-cell-group>
     </div>
   </div>
@@ -47,6 +50,9 @@ export default {
       .then(()=>{
           this.$router.push("home")
       })
+    },
+    register(){
+      this.$router.push("register")
     }
   },
   computed: {
@@ -77,5 +83,11 @@ export default {
   }
   .btn{
     margin-top: 30px;
+  }
+  .zhuce{
+    text-align: right;
+    margin-left: 270px;
+    margin-top: 10px;
+    cursor: pointer;
   }
 </style>
