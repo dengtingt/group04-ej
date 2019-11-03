@@ -2,7 +2,7 @@
   <div id="login">
     <div class="login_header">
       <div><i class="iconfont icon-swticonjiazheng1"></i></div>
-      <div>家政服务平台·顾客端</div>
+      <div>hy电器·顾客端</div>
     </div>
     <div class="background">
       <van-cell-group class="form">
