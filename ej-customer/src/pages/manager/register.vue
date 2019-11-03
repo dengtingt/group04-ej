@@ -53,6 +53,8 @@ export default {
     data() {
         return {
         form:{
+            realname:"",
+            password:""
         }
         }
     },
@@ -63,10 +65,11 @@ export default {
         onClickLeft(){
             this.$router.go(-1)
         },
-        submit(){
-            console.log(this.form);
-            post('/customer/saveOrUpdate',this.form);
+       async  submit(){
+            
+          let response = await  post('/customer/saveOrUpdate',this.form);
             this.form = {};
+             this.$router.push("login");
         }
     },
     computed: {
