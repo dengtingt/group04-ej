@@ -14,16 +14,32 @@
   </div>
 </template>
 <script>
+import {mapState,mapActions} from 'vuex'
 export default {
   data(){
     return {
       active:0
     }
   },
+  created(){
+        console.log(this.token);
+        if(this.token){
+          // 查询info
+          this.findUser(this.token);
+        } else {
+          this.$toast("token失效")
+          // 跳转到登录
+          this.$router.push({path:"/login"})
+        }
+  },
+  computed:{
+    ...mapState('user',['token','info'])
+  },
   methods:{
-    tabChangeHandler(path){
+    ...mapActions('user',["findUser"]),
+     tabChangeHandler(path){
       this.$router.push({path})
     }
-  }
+  },
 }
 </script>

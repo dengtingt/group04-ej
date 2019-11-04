@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Manager from '../pages/manager/Layout.vue'
+import Login from '../pages/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'manager',
+  {  path:'/',
+    redirect:'/login',
+    // path:"/manager",
+    name: '/manager',
     component: Manager,
     children:[{
       path:"home",
@@ -16,6 +18,12 @@ const routes = [
       path:"order",
       component:() => import('../pages/manager/Order.vue')
     },{
+      path:"detail",
+      component:() => import('../pages/manager/detail.vue')
+    },{
+      path:"addressMan",
+      component:() => import('../pages/manager/addressMan.vue')
+    },{
       path:"user",
       component:() => import('../pages/manager/User.vue')
     }]
@@ -23,7 +31,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../pages/Login.vue')
+    component:Login
   }
 ]
 

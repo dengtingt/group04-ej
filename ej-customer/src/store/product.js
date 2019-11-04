@@ -5,7 +5,9 @@ export default {
   state:{
     products:[],
     visible:false,
-    title:"添加产品信息"
+    title:"添加产品信息",
+    shopcar:[],
+    // product:{}
   },
   getters:{
     productSize(state){
@@ -22,7 +24,22 @@ export default {
         })
         return state.products;
       }
-    }
+    },
+    productStatusFilter(state){
+      return (categoryId)=>{
+        return state.products.filter((item)=>{
+          return item.categoryId === categoryId
+        })
+      }
+  },
+  shopprice(state){
+   
+    let total = 0 ;
+    state.shopcar.forEach((item)=>{
+      total+= (item.number * item.price*100)
+    }); 
+    return total;
+  }
   },
   mutations:{
     showModal(state){
@@ -34,8 +51,26 @@ export default {
     refreshProducts(state,products){
       state.products = products;
     },
+    // refreshProduct(state,product){
+    //   state.product = product;
+    // },
     setTitle(state,title){
       state.title = title;
+    },
+    shopcard(state,line){
+      let flag = state.shopcar.some(res=>
+        res.productId===line.productId
+      )
+      // let flag = state.shopcar.some(item=>item.productId === line.productId)
+      if(flag){
+        state.shopcar.forEach(res=>{
+          if(res.productId===line.productId){
+            res.number = line.number;
+          }
+        })  
+      }else{
+        state.shopcar.push(line);
+      }
     }
   },
   actions:{
@@ -55,6 +90,9 @@ export default {
     async findAllProducts(context){
       // 1. ajax查询
       let response = await get("/product/findAll");
+        response.data.forEach(item => {
+          item.number = 0;
+      });
       // 2. 将查询结果更新到state中
       context.commit("refreshProducts",response.data);
     },

@@ -1,31 +1,27 @@
 <template>
-  <div class="home">
-    <van-row>
-      <img style="width:100%" src="../../assets/images/home_02.png" alt="">
-    </van-row>
-    <van-row>
-      <van-grid :column-num="3">
-        <van-grid-item
-          v-for="c in categories"
-          :key="c.id"
-          :icon="c.icon"
-          :text="c.name"
-        />
-      </van-grid>
-    </van-row>
+  <div class="home" style="overflow:hidden; height: 100%;
+ width: 100%;">
+    <div class="tp" style="height: 100%;
+ width: 100%;" >
+      <img src="./timg.jpg" alt="">
+    </div>
   </div>
 </template>
 <script>
-import {mapState,mapActions} from 'vuex'
+import {mapState} from 'vuex'
 export default {
-  created(){
-    this.findAllCategories();
-  },
   computed:{
-    ...mapState("category",["categories"])
-  },
-  methods:{
-    ...mapActions("category",["findAllCategories"])
+    ...mapState("user",["info"])
   }
 }
 </script>
+<style>
+.tp{
+  height: 200px;
+  width: 200px;
+}
+img{
+ height: 100%;
+ width: 100%;
+}
+</style>
