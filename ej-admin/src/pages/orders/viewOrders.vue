@@ -140,7 +140,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('order', ['orders1', 'visible', 'title', 'loading', 'waiters1']),
+    ...mapState('order', ['orders1', 'visible', 'title', 'loading', 'waiters1', 'id']),
     ...mapGetters('order', ['orderOrder', 'orderSize', 'ordersStatusFilter'])
   },
   created() {
@@ -161,13 +161,14 @@ export default {
       })
     },
     sendOrderHanlder(a) {
+      this.id = a
       console.log('a', a)
-      console.log('this.id:', this.id)
+      console.log('this.id', this.id)
     },
     waiterid(command) {
       console.log(this.id)
       console.log(command)
-      this.sendOrder(1, 2)
+      this.sendOrder(command, this.id)
       console.log('command', command)
     }
   }
