@@ -1,5 +1,5 @@
 module.exports = {
-  title: '家政服务平台',
+  title: 'HY电商',
 
   /**
    * @type {boolean} true | false
