@@ -1,7 +1,7 @@
 <template>
   <div class="productDetails">
     <h2>产品详情</h2>
-    <el-button size="small" type="text" @click="backHandler">返回</el-button>
+    <el-button size="small" @click="backHandler">返回</el-button>
     <p><strong>产品单价：</strong>{{ products.price }}</p>
     <p><strong>产品介绍：</strong>{{ products.description }}</p>
     <p><strong>产品状态：</strong>{{ products.status }}</p>

@@ -14,11 +14,11 @@
         <el-table-column prop="price" label="价格" />
         <el-table-column prop="idname" label="栏目编号" />
         <el-table-column prop="status" label="状态" />
-        <el-table-column label="操作">
+        <el-table-column label="操作" align="center">
           <template #default="record">
-            <i class="el-icon-delete" href="" @click.prevent="deleteHandler(record.row.id)" /> &nbsp;
-            <i class="el-icon-edit-outline" href="" @click.prevent="editHandler(record.row)" /> &nbsp;
-            <a href="" @click.prevent="toDetailsHandler(record.row)">详情</a>
+            <el-button size="mini" type="danger" icon="el-icon-delete" circle @click="deleteHandler(record.row.id)" />
+            <el-button size="mini" type="primary" icon="el-icon-edit-outline" circle @click="editHandler(record.row)" />
+            <el-button size="mini" type="success" icon="el-icon-view" circle @click="toDetailsHandler(record.row)" />
           </template>
         </el-table-column>
       </el-table>
