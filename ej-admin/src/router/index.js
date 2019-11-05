@@ -99,6 +99,44 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
+    path: '/customer',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        component: () => import('@/pages/customer/List'),
+        name: 'customer',
+        meta: { title: '顾客管理', icon: 'tab' }
+      },
+      {
+        path: 'details',
+        hidden: true,
+        component: () => import('@/pages/customer/Details'),
+        name: 'details',
+        meta: { title: '顾客详情', icon: 'tab' }
+      }
+    ]
+  },
+  {
+    path: '/category',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        component: () => import('@/pages/category/List'),
+        name: 'category',
+        meta: { title: '栏目管理', icon: 'tab' }
+      },
+      {
+        path: 'details',
+        hidden: true,
+        component: () => import('@/pages/category/Details'),
+        name: 'details',
+        meta: { title: '栏目详情', icon: 'tab' }
+      }
+    ]
+  },
+  {
     path: '/waiter',
     component: Layout,
     children: [

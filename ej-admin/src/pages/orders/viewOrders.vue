@@ -14,7 +14,7 @@
             <el-table-column prop="status" label="状态" />
             <el-table-column label="操作" prop="orders.waiters" width="300px">
               <template #default="record">
-                <a href="" @click.prevent="toDetailsHandler(record.row)">详情</a>&nbsp;
+                <el-button size="mini" type="success" icon="el-icon-view" circle @click="toDetailsHandler(record.row)" />
               </template>
             </el-table-column>
           </el-table>
