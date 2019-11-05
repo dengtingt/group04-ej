@@ -10,7 +10,7 @@
       <el-table :data="products" size="mini" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" />
         <el-table-column prop="id" label="编号" />
-        <el-table-column prop="name" label="功能" />
+        <el-table-column prop="name" label="名称" />
         <el-table-column prop="price" label="价格" />
         <el-table-column prop="idname" label="栏目编号" />
         <el-table-column prop="status" label="状态" />
@@ -27,7 +27,7 @@
     <!-- 模态框 -->
     <el-dialog :title="title" :visible.sync="visible" @close="dialogCloseHandler">
       <el-form ref="productForm" :model="product" :rules="rules">
-        <el-form-item label="功能" label-width="100px" prop="name">
+        <el-form-item label="名称" label-width="100px" prop="name">
           <el-input v-model="product.name" auto-complete="off" />
         </el-form-item>
         <el-form-item label="价格" label-width="100px" prop="price">
@@ -47,7 +47,7 @@
         <el-form-item label="产品主图" label-width="100px" prop="photo">
           <el-upload
             class="upload-demo"
-            action="https://134.175.154.93:6677/file/upload"
+            action="http://134.175.154.93:6677/file/upload"
             :file-list="fileList"
             :on-success="uploadSuccessHandler"
             :limit="1"
@@ -77,7 +77,7 @@ export default {
       ids: null,
       rules: {
         name: [
-          { required: true, message: '请输入功能', trigger: 'blur' },
+          { required: true, message: '请输入名称', trigger: 'blur' },
           { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }
         ],
         price: [
@@ -141,9 +141,9 @@ export default {
       this.closeModal()
     },
     editHandler(row) {
-      this.fileList.push({ name: 'old', url: row.photo })
+      this.fileList.push({ url: row.photo })
       this.product = row
-      this.setTitle('修改顾客信息')
+      this.setTitle('修改产品信息')
       this.showModal()
     },
     deleteHandler(id) {
@@ -160,12 +160,14 @@ export default {
         })
     },
     uploadSuccessHandler(response) {
-      console.log(response)
+      // console.log(response);
+      // console.log(file);
+      // console.log(fileList);
       if (response.status === 200) {
         const id = response.data.id
         const photo = 'http://134.175.154.93:8888/group1/' + id
         this.product.photo = photo
-        this.product = Object.assing({}, this.product)
+        // this.product = Object.assing({}, this.product)
       } else {
         this.$message.error('上传异常')
       }

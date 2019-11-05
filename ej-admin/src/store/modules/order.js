@@ -1,11 +1,12 @@
 import { get, post, post_array } from '@/http/axios'
 import { Stats } from 'fs'
-// import {post,post_array} from '@/utils/request'
+import request from '@/utils/request'
 
 export default {
   namespaced: true,
   state: {
     id: '',
+    data: [],
     orders1: [],
     waiters1: {},
     visible: false,
@@ -57,6 +58,9 @@ export default {
     },
     findWaiters(state, waiter) {
       state.waiters1 = waiter
+    },
+    changeId(state, id) {
+      state.id = id
     }
   },
   actions: {
@@ -77,18 +81,24 @@ export default {
       }, 1000)
     },
     async findAllwaiters(context) {
-      // context.commmit("beginLoading");
       const response = await get('/waiter/findAll')
       context.commit('findWaiters', response.data)
     },
-    async sendOrder({ commit }, waiterid, orderid) {
-      console.log('waiterid', waiterid)
-      console.log('orderid', orderid)
-
-      // let  data:{"waiterId":waiter,"orderId":orderid};
-      //  let response = await get("/order/sendOrder",data);
-      //  console.log(response);
-      //  context.commit("refreshOrders")
+    async sendOrder({ commit, state, dispatch }, waiterid) {
+      const response = await request.get('/order/sendOrder', { params: { waiterId: waiterid, orderId: state.id }})
+      // console.log(response);
+      setTimeout(() => {
+        commit('endLoading')
+      }, 1000)
+      return response
+    },
+    async orderCancelHandler({ commit }, waiters) {
+      const response = await request.get('/order/cancelSendOrder?orderId=' + waiters)
+      console.log(response)
+      setTimeout(() => {
+        commit('endLoading')
+      }, 1000)
+      return response
     }
   }
 }

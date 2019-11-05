@@ -83,10 +83,8 @@ export default {
       context.commit('refreshProducts', response.data)
     },
     async findProductByid({ commit }, id) {
-      console.log('idididididididid', id)
       // 1. ajax查询
       const response = await get('/product/findById', { id })
-      console.log('+++++++++++++++++++++', response)
       // 2. 将查询结果更新到state中
       commit('refreshProducts', response.data)
     },

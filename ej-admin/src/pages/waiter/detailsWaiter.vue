@@ -1,7 +1,6 @@
 <template>
   <div class="customerDetails">
     <h2>员工详情</h2>
-    <!-- {{messages}} -->
     <el-button size="small" type="text" @click="backHandler">返回</el-button>
     <el-tabs v-model="activeName">
       <el-tab-pane label="基本信息" name="info">

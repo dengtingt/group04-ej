@@ -66,9 +66,7 @@
             <el-table-column prop="status" label="状态" />
             <el-table-column label="操作" prop="waiters" width="300px">
               <template #default="record">
-                <i class="el-icon-delete" href="" @click="deleteHandler(record.row.id)" /> &nbsp;
-                <i class="el-icon-delete" href="" @click="deleteHandler(record.row.id)" /> &nbsp;
-                <a href="" @click.prevent="toDetailsHandler(record.row)">详情</a>&nbsp;
+                <a href="" @click.prevent="cancelOrderHandler(record.row.id)">取消派单</a>&nbsp;
               </template>
             </el-table-column>
           </el-table>
@@ -148,28 +146,33 @@ export default {
     this.findAllwaiters()
   },
   methods: {
-    ...mapMutations('order', ['showModal', 'closeModal', 'setTitle', 'findWaiters']),
-    ...mapActions('order', ['findAllOrders', 'saveOrUpdateOrder', 'deleteOrderById', 'batchDeleteOrder', 'findAllwaiters', 'sendOrder']),
+    ...mapMutations('order', ['changeId', 'showModal', 'closeModal', 'setTitle', 'findWaiters']),
+    ...mapActions('order', ['findAllOrders', 'saveOrUpdateOrder', 'deleteOrderById', 'batchDeleteOrder', 'findAllwaiters', 'sendOrder', 'orderCancelHandler']),
     // 普通方法
     toDetailsHandler(order) {
-      // console.log("2222222222",order);
-      // 跳转到详情页面
-      // this.$router.push("/customerDetails")
       this.$router.push({
         path: '/orders/datailsOrders',
         query: { orders: order }
       })
     },
     sendOrderHanlder(a) {
-      this.id = a
-      console.log('a', a)
-      console.log('this.id', this.id)
+      this.changeId(a)
     },
     waiterid(command) {
-      console.log(this.id)
       console.log(command)
-      this.sendOrder(command, this.id)
-      console.log('command', command)
+      const promise = this.sendOrder(command, this.id)
+      promise.then((response) => {
+        this.$message({ type: 'success', message: response.statusText })
+      })
+      this.findAllOrders()
+    },
+    cancelOrderHandler(id) {
+      // console.log(id);
+      const promise = this.orderCancelHandler(id)
+      promise.then((response) => {
+        this.$message({ type: 'success', message: response.statusText })
+      })
+      this.findAllOrders()
     }
   }
 }
