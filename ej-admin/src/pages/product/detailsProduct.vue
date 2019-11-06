@@ -7,9 +7,10 @@
     <p><strong>产品状态：</strong>{{ products.status }}</p>
     <p><strong>产品栏目名称：</strong>{{ products.category.name }}</p>
     <p><strong>产品介绍：</strong></p>
-    <p><strong>产品主图：</strong>
+    <div>
+      <p><strong>产品主图：</strong></p>
       <img :src="products.photo" alt="">
-    </p>
+    </div>
   </div>
 </template>
 <script>

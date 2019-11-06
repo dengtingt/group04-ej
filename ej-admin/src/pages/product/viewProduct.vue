@@ -167,7 +167,8 @@ export default {
         const id = response.data.id
         const photo = 'http://134.175.154.93:8888/group1/' + id
         this.product.photo = photo
-        // this.product = Object.assing({}, this.product)
+        // 克隆，双向数据渲染（可无）
+        this.product = Object.assing({}, this.product)
       } else {
         this.$message.error('上传异常')
       }
