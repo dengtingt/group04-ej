@@ -189,7 +189,7 @@ export const asyncRoutes = [
         component: () => import('@/pages/orders/datailsOrders'),
         name: 'details',
         hidden: true,
-        meta: { title: '产品详情', icon: 'tab' }
+        meta: { title: '订单详情', icon: 'tab' }
       }
     ]
   },

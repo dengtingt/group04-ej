@@ -1,5 +1,6 @@
 <template>
   <div class="orderDatails">
+    <el-button type="primary" size="small" @click="backHandler">返回</el-button>
     <el-tabs v-model="activeName">
       <el-tab-pane label="所有订单" name="" />
       <el-tab-pane label="待支付" name="" />
