@@ -6,7 +6,7 @@
 
     <el-tabs v-model="activeName">
       <el-tab-pane label="基本信息" name="info">
-        <el-table :data="customersFilter ">
+        <el-table :data="customersFilter(this.$route.query.id)">
           <el-table-column label="姓名" prop="realname" />
           <el-table-column label="登录名" prop="username" />
           <el-table-column label="登录密码" prop="password" />
