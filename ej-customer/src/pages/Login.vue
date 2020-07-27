@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <div class="login_header">
-      <div><i class="iconfont icon-swticonjiazheng1"></i></div>
+      <div><i class="iconfont icon-xingzhuang"></i></div>
       <div>hy电器·顾客端</div>
     </div>
     <div class="background">
@@ -45,8 +45,19 @@ export default {
     ...mapActions("user",["login"]),
     loginyz(){
       this.login(this.user)
-      .then(()=>{
-          this.$router.push("home")
+      .then((response)=>{
+        if(response.status === 200){
+          // this.$notify({
+          //   message:"success",
+          //   color:"yellow"
+          // })
+           this.$router.push("home")
+        }else{
+          this.$notify({
+            message:"用户名或密码错误",
+            color:"red"
+          })
+        }
       })
     },
     register(){

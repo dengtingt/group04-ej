@@ -1,8 +1,48 @@
 <template>
   <div class="order">
-    <div class="dingd">订单管理</div>
+    <!-- <div class="dingd">订单管理</div> -->
+    <!-- 标题 -->
+    <div class="title">
+        <van-nav-bar
+          title="我的订单"
+        />
+    </div>
  
-    <div class="head">
+    <!-- 标签页 -->
+    <van-tabs :active="active" bind:change="onChange">
+      <van-tab title="全部">
+        <!-- 全部订单列表 -->
+        <briup-order-item v-for='order in form' :key="order.id"  :data='order'></briup-order-item>
+      </van-tab>
+      <van-tab title="待接单">
+        <!-- <briup-order-item v-for='order in ordersStatusFilter("待派单")' :key="order.id"  :data='order'></briup-order-item> -->
+        <briup-order-item v-for='order in ddHandler("待接单")' :key="order.id"  :data='order'>
+          <van-button class="btn" round plain type="warning" size="mini" @click="acceptorder(order.id)">接单</van-button>
+          <van-button class="btn" round plain type="info" size="mini" @click="rejectorder(order.id)">拒单</van-button>
+        </briup-order-item>
+         <!-- <briup-order-item v-for='order in ordersStatusFilter("待服务")' :key="order.id"  :data='order'></briup-order-item> -->
+      </van-tab>
+      <van-tab title="待服务">
+        <!-- 待确认订单列表 -->
+        <briup-order-item v-for='order in ddHandler("待服务")' :key="order.id"  :data='order'>
+          <van-button class="btn" round plain type="warning" size="mini" @click="serviceCompleteOrder(order.id)">结束服务</van-button>
+        </briup-order-item>
+      </van-tab>
+      <van-tab title="待确认">
+        <!-- 待确认订单列表 -->
+        <briup-order-item v-for='order in ddHandler("待确认")' :key="order.id"  :data='order'>
+          <!-- <van-button class="btn" round plain type="warning" size="mini" @click="serviceCompleteOrder(order.id)">结束服务</van-button> -->
+        </briup-order-item>
+      </van-tab>
+      <van-tab title="已完成">
+        <!-- 已完成订单列表 -->
+        <briup-order-item v-for='order in ddHandler("已完成")' :key="order.id"  :data='order'>
+          <!-- <van-button class="btn" round plain type="info" size="mini" @click="deleteHandler(order.id)">删除订单</van-button> -->
+          <!-- <van-button class="btn" round plain type="warning" size="mini" @click="comment(order)">评价</van-button> -->
+        </briup-order-item>
+      </van-tab>
+    </van-tabs>
+    <!-- <div class="head">
       <van-tabs v-model="active" class="style"   >
         <van-tab title="所有订单">
            <div v-for=" a in form"  :key="a.id" >
@@ -225,82 +265,105 @@
                   </div>
             </div>
           </van-tab>
-      </van-tabs>
-    </div>
+      </van-tabs> 
+    </div> -->
     
     
   </div>
 </template>
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-import { reject } from 'q';
+// import { reject } from 'q';
 export default {
     data(){
       return{
         active:0,
-        order:[]
+        // order:[]
       }
     },
     created(){
-this.loadDate();
+      this.loadDate(this.info.id);
     },
     computed:{
       ...mapState("order",["form"]),
-       ...mapGetters("order",["ddHandler"])
+      ...mapState("user",["info"]),
+      ...mapGetters("order",["ddHandler"])
     },
     methods:{
-      ...mapActions("order",["loadDate","findAll","reject","accept","service","delete"]),  
+      ...mapActions("order",["loadDate","findAll","reject","accept","service","delete"]),
+      // 标签页切换  
+      onChange(event) {
+        wx.showToast({
+          title: `切换到标签 ${event.detail.name}`,
+          icon: 'none'
+        });
+      },
+      // 拒单
       rejectorder(id){
-        this.reject(id).then((res)=>{
-         alert(res.statusText)
-         this.loadDate();
+        this.reject(id).then(()=>{
+        //  alert(res.statusText)
+         this.loadDate(this.info.id);
         })
       },
+      // 接单
       acceptorder(id){
-        this.accept(id).then((res)=>{
-         alert(res.statusText)
-         this.loadDate();
+        this.accept(id).then(()=>{
+        //  alert(res.statusText)
+         this.loadDate(this.info.id);
         })
       },
+      // 结束服务
       serviceCompleteOrder(id){
-        this.service(id).then((res)=>{
-         alert(res.statusText)
-         this.loadDate();
+        this.service(id).then(()=>{
+        //  alert(res.statusText)
+         this.loadDate(this.info.id);
         })
       },
-      deleteorder(id){
-        this.delete(id).then((res)=>{
-         alert(res.statusText)
-         this.loadDate();
-        })
-      }
+      // deleteorder(id){
+      //   this.delete(id).then((res)=>{
+      //    alert(res.statusText)
+      //    this.loadDate();
+      //   })
+      // }
 
     }
 }
 </script>
-<style>
+<style scoped>
   /* .order{
     background-color: #ccc;
   } */
-  .dingd{
-    text-align: center;
-    background-color: lightblue;
-    height: 40px;
-    line-height: 40px;
-    font-size: 24px;
-  }
-  .gk{
-    margin-bottom: 5px;
-    border-bottom: 1px solid #ccc;
-    font-size: 20px;
-  }
-  .style{
-   
-  }
-  .wcdd{
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #ccc;
-  }
+  /* 清空基础样式 */
+    html {
+        color: #333;
+        font:normal 12px '微软雅黑','Microsoft YaHei';
+    }
+    body,ul,ol,p {
+        margin: 0;
+        padding: 0;
+    }
+    ul,ol {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .order{
+      margin-bottom: 50px;
+      background: #f1f1f1;
+    }
+    .title{
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .btn{
+      width: 70px;
+      height: 25px;
+      margin-top: 10px;
+    }
   
 </style>

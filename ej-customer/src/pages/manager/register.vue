@@ -2,7 +2,7 @@
   <div class="register">
       <div>
           <van-nav-bar
-                title="标题"
+                title="注册"
                 left-text="返回"
                 right-text=""
                 left-arrow

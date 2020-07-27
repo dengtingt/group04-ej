@@ -12,12 +12,12 @@
         <!-- 全部订单列表 -->
         <briup-order-item v-for='order in AllOrders' :key="order.id"  :data='order'></briup-order-item>
       </van-tab>
-      <van-tab title="待支付">
-        <!-- 待支付订单列表 -->
+      <!-- <van-tab title="待支付">
+        待支付订单列表
         <briup-order-item v-for='order in ordersStatusFilter("待支付")' :key="order.id"  :data='order'>
           <van-button class="btn" round plain type="warning" size="mini" @click="comment">支付</van-button>
         </briup-order-item>
-      </van-tab>
+      </van-tab> -->
       <van-tab title="待服务">
         <briup-order-item v-for='order in ordersStatusFilter("待派单")' :key="order.id"  :data='order'></briup-order-item>
          <briup-order-item v-for='order in ordersStatusFilter("待接单")' :key="order.id"  :data='order'></briup-order-item>
@@ -48,13 +48,13 @@ export default {
       active:0
     }
   },
+  created() {
+    this.findAllOrder(this.info.id)
+  },
   computed:{
     ...mapState("order",["AllOrders"]),
     ...mapState("user",["info"]),
     ...mapGetters('order',['ordersStatusFilter'])
-  },
-  created() {
-    this.findAllOrder(this.info.id)
   },
   methods:{
     ...mapActions("order",["findAllOrder","deleteOrder","confirmOrder"]),

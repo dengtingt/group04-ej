@@ -8,10 +8,11 @@ export default {
     },
     getters:{
       ddHandler(state){
-        return function(status){
-          return state.form.filter((item)=>{
-           return item.status === status;
-          })
+        return (status)=>{
+          return state.form.filter(item=>item.status === status)
+          // return state.form.filter((item)=>{
+          //   item.status === status;
+          // })
         }
         // if(stete.form.status === "待接单"){
         //   return form.status;
@@ -26,8 +27,8 @@ export default {
       }
     },
     actions: {
-      async loadDate(context){
-       let response =  await get("/order/findAll")
+      async loadDate(context,waiterId){
+        let response =  await get("/order/query?waiterId="+waiterId)
         context.commit("refreshFome",response.data)
       },
       async reject(context,id){

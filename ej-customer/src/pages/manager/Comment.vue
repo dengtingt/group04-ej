@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="btn">
-                    <van-button class="savebtn" plain type="info">提交订单</van-button>
+                    <van-button class="savebtn" plain type="info">提交评价</van-button>
                 </div>
             </div>
         </briup-fulllayout>
@@ -42,9 +42,8 @@ export default {
         commentHandler(value){
             let comment = {};
             comment.id = this.order.id;
-            comment.content = this.value;
+            comment.content = value+'星好评';
             comment.commentTime = new Date();
-            console.log(comment)
             this.saveComment(comment);
         }
     }

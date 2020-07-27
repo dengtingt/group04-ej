@@ -24,7 +24,7 @@ export default {
         response.data.forEach(item=>{
           let address = {
             id: item.id,
-            name: '张三',
+            name: '邓婷婷',
             tel: item.telephone,
             address: item.province+""+item.city+""+item.area+""+item.address
           }

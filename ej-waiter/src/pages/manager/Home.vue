@@ -1,10 +1,8 @@
 <template>
-  <div class="home" style="overflow:hidden; height: 100%;
- width: 100%;">
-    <div class="tp" style="height: 100%;
- width: 100%;" >
-      <img src="./timg.jpg" alt="">
-    </div>
+  <div class="home">
+    <van-row>
+      <img style="width:100%" src="../../assets/images/home_02.jpg" alt="">
+    </van-row>
   </div>
 </template>
 <script>
@@ -15,7 +13,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .tp{
   height: 200px;
   width: 200px;

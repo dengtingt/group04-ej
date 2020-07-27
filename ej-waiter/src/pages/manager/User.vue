@@ -1,24 +1,40 @@
 <template>
   <div class="user">
-    <h2>我的页面</h2>
-    <div class="icon">
-         <van-icon name="user-o" />
+    <!-- 标题 -->
+    <div class="title">
+        <van-nav-bar
+          title="我的"
+        />
     </div>
-    <div class="name">
-      {{info.name}}
+    <!-- 用户信息显示 -->
+    <div class="photo">
+        <img :src="info.avatar" alt="">
+        <p>{{info.name}}</p>
     </div>
-    <div class="detail" @click="detailHandler"> 
-      详细信息  
+    <!-- 详细信息 -->
+    <!-- <div class="detail" @click="detailHandler">
+      <van-cell
+        is-link
+        title="详细信息"
+      />
+    </div> -->
+    <!-- 地址信息 -->
+    <!-- <div class="address" @click="AddressManger">
+      <van-cell
+        is-link
+        title="我的地址"
+      />
+    </div> -->
+    <!-- 退出登录 -->
+    <div class="logout" @click="tabChangeHandler">
+        <van-cell
+          is-link
+          title="退出"
+        />
     </div>
-    <div class="address" @click="AddressManger">
-      地址管理
-    </div>
-      <div @click="tabChangeHandler" class="out">
-         <van-button type="primary" size="large">退出登录</van-button>
-      </div>
   </div>
 </template>
-<script>
+<script scoped>
 import {mapState,mapActions} from 'vuex'
 export default {
   data(){
@@ -47,40 +63,48 @@ export default {
 }
 </script>
 <style >
-h2{
-  text-align:center;
-}
-.out{
-  margin-bottom: 0%;
-  color: darkorange;
-   border-bottom: 2px solid #fff;
-}
-.icon{
-  text-align: center;
-  font-size: 100px;
-  color: lightblue;
-}
-.name{
-  text-align: center;
- position: absolute;
- top:168px;
- left: 135px;
-}
-.detail{
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-  color: white;
-  font-size: border;
-  background-color:lightblue;
-  border-bottom: 2px solid #fff;
-}
-.address{
-  height: 50px;
-  line-height: 50px;
-  background-color: lightblue;
-  text-align: center;
-   border-bottom: 2px solid #fff;
-}
+/* 清空基础样式 */
+    html {
+        color: #333;
+        font:normal 12px '微软雅黑','Microsoft YaHei';
+    }
+    body,ul,ol,p {
+        margin: 0;
+        padding: 0;
+    }
+    ul,ol {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .user{
+      overflow-x: hidden;
+    }
+    .photo{
+      background-color: #ffffff;
+    }
+
+    .photo img{
+      position: relative;
+      left: -60px;
+      width: 120px;
+      height: 120px;
+      margin: 20px 50% 10px;
+      border: 1px solid #efefef;
+      border-radius: 50%;
+    }
+    .photo p{
+      font-size: 14px;
+      text-align: center;
+    }
+    .address,.logout{
+        border-bottom: 1px solid #ededed;
+    }
+    a{
+      font-size: 12px;
+      margin-left: 30px;
+    }
 </style>

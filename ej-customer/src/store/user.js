@@ -26,6 +26,7 @@ export default{
             setToken(token);
             // 3. 将token维护到状态机中
             context.commit("refreshToken",token);
+            return response
         },
 
         // 获取用户信息
